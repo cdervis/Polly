@@ -8,8 +8,8 @@ Minimalistic 2D C++ Game Framework
 
 [![Homepage](https://img.shields.io/badge/Homepage-polly2d.org-blue)](https://polly2d.org) &nbsp;
 [![Homepage](https://img.shields.io/badge/Get%20Started-29B24F)](#getting-started) &nbsp;
-[![License](https://img.shields.io/badge/license-GPLv3-green)](https://github.com/cdervis/Polly2D/blob/main/LICENSE.md) &nbsp;
-[![Build](https://github.com/cdervis/Polly2D/actions/workflows/build.yaml/badge.svg)](https://github.com/cdervis/Polly2D/actions/workflows/build.yaml)
+[![License](https://img.shields.io/badge/license-GPLv3-green)](https://github.com/cdervis/Polly/blob/main/LICENSE.md) &nbsp;
+[![Build](https://github.com/cdervis/Polly/actions/workflows/build.yaml/badge.svg)](https://github.com/cdervis/Polly/actions/workflows/build.yaml)
 
 </div>
 
