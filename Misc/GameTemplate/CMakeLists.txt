@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.22)
 
 # CMake options for the game:
 option(GAME_STRICT_WARNINGS "Enable strict compiler warnings?" ON)
-option(GAME_VERBOSE_LOGGING "Enable verbose logging (LogVerbose())?" OFF)
+option(GAME_VERBOSE_LOGGING "Enable verbose logging (logVerbose())?" OFF)
 
 # Set general properties of the game.
 set(game_name "MyGame")
@@ -30,7 +30,7 @@ include(Misc/PackageManagement.cmake)
 # Ensure that Polly is downloaded and set up.
 CPMAddPackage(
     NAME Polly
-    URL https://github.com/cdervis/Polly2D/archive/refs/tags/v${polly_version}.zip
+    URL https://github.com/cdervis/Polly/archive/refs/tags/v${polly_version}.zip
 )
 
 # Add our game as a CMake target.
