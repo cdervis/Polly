@@ -27,14 +27,13 @@ static void verifyArchive(BinaryReader& reader)
 {
     // magic
     {
-        const auto c = static_cast<char>(reader.readUInt8());
-        const auto e = static_cast<char>(reader.readUInt8());
-        const auto a = static_cast<char>(reader.readUInt8());
+        const auto p = char(reader.readUInt8());
+        const auto l = char(reader.readUInt8());
+        const auto a = char(reader.readUInt8());
 
-        const auto     magic    = Array{c, e, a};
-        constexpr auto expected = Array{'p', 'l', 'a'};
+        const auto magic = Array{p, l, a};
 
-        if (magic != expected)
+        if (magic != Array{'p', 'l', 'a'})
         {
             throw Error("Invalid game data (corrupt file)");
         }
@@ -61,17 +60,11 @@ Archive::Archive(const StringView archiveName)
     if (auto data = FileSystem::loadAssetData(_archiveName))
     {
         _compressedData = std::move(*data);
-        try
-        {
-            auto reader = BinaryReader(_compressedData, Details::assetDecryptionKey);
-            verifyArchive(reader);
-            readEntries(reader);
-            _tmpDecompressionBuffer = ByteBlob(tmpDecompressionBufferSize);
-        }
-        catch (const Error& error)
-        {
-            logInfo("Failed to load the game's assets: {}", error.message());
-        }
+
+        auto reader = BinaryReader(_compressedData, Details::assetDecryptionKey);
+        verifyArchive(reader);
+        readEntries(reader);
+        _tmpDecompressionBuffer = ByteBlob(tmpDecompressionBufferSize);
     }
 }
 
