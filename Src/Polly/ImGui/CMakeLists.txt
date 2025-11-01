@@ -1,6 +1,6 @@
 CPMAddPackage(
     NAME imgui
-    URL https://github.com/cdervis/imgui/archive/refs/tags/v1.92.2.zip
+    URL https://github.com/ocornut/imgui/archive/refs/tags/v1.92.4.zip
     DOWNLOAD_ONLY
 )
 
