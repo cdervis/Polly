@@ -208,7 +208,7 @@ Visual Studio Community is free for individual developers and can be used to dev
 
 ::: steps
 
-1. **Download the [Game Template](https://github.com/cdervis/Polly2D/releases/download/v0.9.2/GameTemplate.zip) and unpack it.**
+1. **Download the [Game Template](https://github.com/cdervis/Polly/releases/download/v0.9.3/GameTemplate.zip) and unpack it.**
 
 2. **Open**
    Open the Game Template folder as a CMake project in your preferred IDE.
