@@ -153,7 +153,10 @@ C++ idiomatic <a href="https://github.com/ocornut/imgui" target="_blank">Dear Im
 ## Getting Started
 
 If you're on Windows, [Visual Studio](https://visualstudio.com/) or [CLion](https://www.jetbrains.com/clion/) is recommended, whichever you prefer.
-Visual Studio Community is free for individual developers and can be used to develop free or paid games. CLion is free for non-commercial projects.
+Visual Studio Community is free for individual developers and can be used to develop free or paid games. CLion is free for non-commercial projects and works on Linux and macOS as well.
+
+Another C++ IDE is [Qt Creator](https://www.qt.io/product/development-tools), which is free, open source and cross-platform.
+If you use [Homebrew](https://github.com/Homebrew/brew/releases), you can install Qt Creator easily using `brew install qt-creator`.
 
 ### Install Dependencies
 
@@ -219,6 +222,9 @@ Visual Studio Community is free for individual developers and can be used to dev
    **Example with CLion**
    ![CLion example](/assets/images/clion-open-cmake.webp){width=450 .align-center .margin-top-minus}
 
+   **Example with Qt Creator**
+   ![Qt Creator example](/assets/images/qt-creator-open-cmake.webp){width=900 .align-center .margin-top-minus}
+
    **Example with Xcode**
    <div class="margin-top-minus">
    If you're on macOS and want to use Xcode, you can generate an Xcode project for your game:
@@ -240,7 +246,7 @@ The game template consists of:
 
 - `CMakeLists.txt`: The game's CMake script
 - `Src` folder: Contains the game's source code
-- `MyGame.hpp`: The starting class for the game
+- `Game.hpp`: The starting class for the game
 - `Assets` folder: Contains the game's assets, such as images and sounds
 
 You can change the game's name and other properties in `CMakeLists.txt` to your liking.
