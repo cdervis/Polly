@@ -11,21 +11,22 @@ Copyright &copy; 2025 <a href="https://dervis.de">Cem Dervis</a>
 """
 
 extra_css = [
-    "stylesheets/extra.css",
-    "https://unpkg.com/katex@0/dist/katex.min.css"
+  "stylesheets/extra.css",
+  "https://unpkg.com/katex@0/dist/katex.min.css",
 ]
 
 extra_javascript = [
-    "javascripts/katex.js",
-    "https://unpkg.com/katex@0/dist/katex.min.js",
-    "https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"
+  "javascripts/katex.js",
+  "https://unpkg.com/katex@0/dist/katex.min.js",
+  "https://unpkg.com/katex@0/dist/contrib/auto-render.min.js",
 ]
 
 nav = [
-    { "Home" = "index.md" },
+  { "Home" = "index.md" },
   { "Documentation" = [
     { "Introduction" = "introduction.md" },
     { "Game Structure" = "game-structure.md" },
+    { "Demos" = "demos.md" },
     { "Events" = "events.md" },
     { "Timing" = "timing.md" },
     { "Window" = "window.md" },
@@ -55,15 +56,15 @@ nav = [
     { "API Design" = "cpp.md" },
     { "Package Management" = "package-management.md" },
     { "Publishing" = "publishing.md" },
-  ]},
+  ] },
   { "About" = [
     { "License" = "license.md" },
     { "Imprint" = "imprint.md" },
     { "Privacy" = "privacy.md" },
-  ]},
+  ] },
   { "Community" = [
     { "Contributing" = "contributing.md" },
-  ]},
+  ] },
 ]
 
 [project.theme]
@@ -73,32 +74,32 @@ logo = "assets/logo256.png"
 language = "en"
 
 features = [
-    "announce.dismiss",
-    "content.code.annotate",
-    "content.code.copy",
-    "content.footnote.tooltips",
-    "content.tabs.link",
-    "content.tooltips",
-    "navigation.footer",
-    "navigation.instant",
-    "navigation.instant.prefetch",
-    "navigation.instant.progress",
-    "navigation.path",
-    "navigation.sections",
-    "navigation.top",
-    "navigation.tracking",
-    "navigation.tabs",
-    "search.highlight",
-    #"navigation.indexes",
-    #"toc.follow"
-    #"toc.integrate"
-    #"navigation.tabs.sticky",
-    #"navigation.prune",
-    #"header.autohide",
-    #"navigation.expand",
-    #"content.code.select",
-    #"content.action.edit",
-    #"content.action.view",
+  "announce.dismiss",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.instant.progress",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.top",
+  "navigation.tracking",
+  "navigation.tabs",
+  "search.highlight",
+  #"navigation.indexes",
+  #"toc.follow"
+  #"toc.integrate"
+  #"navigation.tabs.sticky",
+  #"navigation.prune",
+  #"header.autohide",
+  #"navigation.expand",
+  #"content.code.select",
+  #"content.action.edit",
+  #"content.action.view",
 ]
 
 [[project.theme.palette]]
