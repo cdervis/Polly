@@ -24,6 +24,9 @@ namespace Platform
 [[nodiscard]]
 TargetPlatform current();
 
+[[nodiscard]]
+bool is(TargetPlatform platform);
+
 /// Gets a value indicating whether the current platform counts as a desktop platform.
 [[nodiscard]]
 bool isDesktop();

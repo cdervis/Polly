@@ -29,6 +29,11 @@ TargetPlatform Platform::current()
 #endif
 }
 
+bool Platform::is(TargetPlatform platform)
+{
+    return current() == platform;
+}
+
 bool Platform::isDesktop()
 {
     const auto platform = current();
