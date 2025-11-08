@@ -133,7 +133,7 @@ Another C++ IDE is  [:simple-qt: Qt Creator](https://www.qt.io/offline-installer
 
 ### Next Steps
 
-1. 	**Download and unpack the [Game Template](https://github.com/cdervis/Polly/releases/download/v0.9.3/GameTemplate.zip)**
+1. 	**Download and unpack the [Game Template](https://github.com/cdervis/Polly/releases/download/v0.9.4/GameTemplate.zip)**
 
 2. 	Open the Game Template in your preferred IDE.
 
