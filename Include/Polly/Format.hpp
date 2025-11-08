@@ -17,13 +17,13 @@ template<typename T>
 static void formatHelper(String& buffer, StringView& str, const T& value)
 {
     const auto openBracket = str.find('{');
-    if (not openBracket)
+    if (!openBracket)
     {
         return;
     }
 
     const auto closeBracket = str.find('}', *openBracket + 1);
-    if (not closeBracket)
+    if (!closeBracket)
     {
         return;
     }

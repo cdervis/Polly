@@ -17,19 +17,31 @@ void assumptionViolation(
 
 // clang-format off
 
-#ifndef NDEBUG
-#  if defined(_WIN32) || defined(_WIN64)
-#    define debugBreak() __debugbreak()
-#  elif defined(__clang__) && __has_builtin(__builtin_debugtrap)
-#    define debugBreak() __builtin_debugtrap()
-#  else
-   #include <signal.h>
-   __attribute__((always_inline)) __inline__ static void debug_break() {
-       ::raise(SIGTRAP);
-   }
-#  endif
+#if !defined(NDEBUG)
+#if defined(_WIN32) || defined(_WIN64)
+namespace Polly {
+static void debugBreak() {
+    __debugbreak();
+}
+}
+#elif defined(__clang__) && __has_builtin(__builtin_debugtrap)
+namespace Polly {
+static void debugBreak() {
+    __builtin_debugtrap();
+}
+}
 #else
-#  define debugBreak()
+#include <signal.h>
+namespace Polly {
+__attribute__((always_inline)) __inline__ static void debugBreak() {
+    ::raise(SIGTRAP);
+}
+}
+#endif
+#else
+namespace Polly {
+static void debugBreak() {}
+}
 #endif
 
 // clang-format on

@@ -65,10 +65,10 @@ void AudioDevice::setGlobalVolume(float value)
     impl->soloudDevice().setGlobalVolume(value);
 }
 
-void AudioDevice::fadeGlobalVolume(float to_volume, SoundTime fadeDuration)
+void AudioDevice::fadeGlobalVolume(float toVolume, SoundTime fadeDuration)
 {
     PollyDeclareThisImpl;
-    impl->soloudDevice().fadeGlobalVolume(to_volume, fadeDuration.value);
+    impl->soloudDevice().fadeGlobalVolume(toVolume, fadeDuration.value);
 }
 
 bool AudioDevice::isNullDevice() const

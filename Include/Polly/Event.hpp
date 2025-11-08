@@ -21,24 +21,24 @@ enum class DisplayOrientation;
 /// The window that raised such an event is always the game's main window.
 struct WindowEvent
 {
-    u64 timestamp;
+    u64 timestamp = 0;
 };
 
 /// An event that is raised when the game's window is resized.
 struct WindowResizedEvent
 {
-    u64 timestamp;
-    int newWidth;
-    int newHeight;
+    u64 timestamp = 0;
+    int newWidth  = 0;
+    int newHeight = 0;
 };
 
 struct KeyEvent
 {
-    u64         timestamp;
-    Key         key;
-    KeyModifier modifiers;
-    Scancode    scancode;
-    bool        isRepeat;
+    u64         timestamp = 0;
+    Key         key       = {};
+    KeyModifier modifiers = {};
+    Scancode    scancode  = {};
+    bool        isRepeat  = false;
 };
 
 /// An event that is raised when the mouse pointer has just moved.
@@ -106,21 +106,21 @@ struct GamepadEvent
 /// a physical or on-screen keyboard.
 struct TextInputEvent
 {
-    u64    timestamp;
+    u64    timestamp = 0;
     String text;
 };
 
 /// An event that is raised when the orientation of a display has changed.
 struct DisplayOrientationChangedEvent
 {
-    u64                timestamp;
-    u32                displayIndex;
-    DisplayOrientation newOrientation;
+    u64                timestamp      = 0;
+    u32                displayIndex   = 0;
+    DisplayOrientation newOrientation = {};
 };
 
 struct DisplayEvent
 {
-    u64 timestamp;
-    u32 displayIndex;
+    u64 timestamp    = 0;
+    u32 displayIndex = 0;
 };
 } // namespace Polly

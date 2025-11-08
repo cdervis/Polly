@@ -50,7 +50,7 @@ class AudioDevice final
 
     /// Plays a sound with its volume set equally to all channels, and without
     /// panning.
-    SoundChannel playInBackground(const Sound& sound, float volume = -1.0f, bool start_paused = false);
+    SoundChannel playInBackground(const Sound& sound, float volume = -1.0f, bool startPaused = false);
 
     /// Stops the playback of all currently playing sounds.
     void stopAllSounds();

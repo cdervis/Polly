@@ -59,7 +59,7 @@ class BinaryReader
     String readEncryptedString();
 
     template<typename T>
-    requires std::is_enum_v<T> and std::is_same_v<std::underlying_type_t<T>, int>
+    requires std::is_enum_v<T> && std::is_same_v<std::underlying_type_t<T>, int>
     [[nodiscard]]
     T readEnum()
     {

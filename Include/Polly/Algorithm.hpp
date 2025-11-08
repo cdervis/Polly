@@ -261,8 +261,7 @@ constexpr Maybe<u32> binaryFindIndex(const Container& container, const T& value)
         }
     }
 
-    return not(first == container.end()) and not(value < *first) ? u32(first - container.begin())
-                                                                 : Maybe<u32>();
+    return !(first == container.end()) && !(value < *first) ? u32(first - container.begin()) : Maybe<u32>();
 }
 
 template<Concepts::ContiguousContainer Container>
@@ -508,7 +507,7 @@ constexpr Maybe<u32> mismatch(const Container1& container1, const Container2& co
 }
 
 template<typename InputPtr, typename OutputPtr>
-requires(std::is_pointer_v<InputPtr> and std::is_pointer_v<OutputPtr>)
+requires(std::is_pointer_v<InputPtr> && std::is_pointer_v<OutputPtr>)
 OutputPtr move(InputPtr first, InputPtr last, OutputPtr dstFirst)
 {
     for (; first != last; ++dstFirst, ++first)
@@ -520,7 +519,7 @@ OutputPtr move(InputPtr first, InputPtr last, OutputPtr dstFirst)
 }
 
 template<typename Ptr1, typename Ptr2>
-requires(std::is_pointer_v<Ptr1> and std::is_pointer_v<Ptr2>)
+requires(std::is_pointer_v<Ptr1> && std::is_pointer_v<Ptr2>)
 Ptr2 moveBackward(Ptr1 first, Ptr1 last, Ptr2 dstLast)
 {
     while (first != last)
@@ -533,8 +532,8 @@ Ptr2 moveBackward(Ptr1 first, Ptr1 last, Ptr2 dstLast)
 
 template<Concepts::ListLike DstContainer, Concepts::ForwardContainer SrcContainer, typename Func>
 requires Concepts::HasAddItem<DstContainer, std::invoke_result_t<Func, typename SrcContainer::value_type>>
-         and std::invocable<Func, typename SrcContainer::value_type>
-         and std::constructible_from<
+         && std::invocable<Func, typename SrcContainer::value_type>
+         && std::constructible_from<
              typename DstContainer::value_type,
              std::invoke_result_t<Func, typename SrcContainer::value_type>>
 [[nodiscard]]

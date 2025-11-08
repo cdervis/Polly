@@ -19,7 +19,7 @@ namespace Concepts
 {
 /// Defines the concept of a number, either integral or floating-point.
 template<typename T>
-concept Number = std::is_arithmetic_v<T> and not std::is_same_v<bool, T>;
+concept Number = std::is_arithmetic_v<T> && !std::is_same_v<bool, T>;
 
 template<typename T, typename Comparer>
 concept Comparable = requires(T lhs, T rhs, Comparer c) {
@@ -32,7 +32,7 @@ concept HasCompoundAdd = requires(T lhs, U rhs) {
 };
 
 template<typename T, typename U = T>
-concept Summable = std::is_default_constructible_v<T> and HasCompoundAdd<T, U>;
+concept Summable = std::is_default_constructible_v<T> && HasCompoundAdd<T, U>;
 
 template<typename T, typename Comparer>
 concept IsDefaultLess = std::is_same_v<Comparer, Comparers::Less<T>>;
@@ -41,13 +41,13 @@ template<typename T, typename Comparer>
 concept IsDefaultEqual = std::is_same_v<Comparer, Comparers::Equal<T>>;
 
 template<typename T, typename Comparer = Comparers::Less<T>>
-concept LessComparable = (IsDefaultLess<T, Comparer> and requires(T lhs, T rhs) { lhs < rhs; })
-                         or (not IsDefaultLess<T, Comparer> and Comparable<T, Comparer>);
+concept LessComparable = (IsDefaultLess<T, Comparer> && requires(T lhs, T rhs) { lhs < rhs; })
+                         || (!IsDefaultLess<T, Comparer> && Comparable<T, Comparer>);
 
 template<typename T, typename U = T, typename Comparer = Comparers::Equal<T>>
-concept EqualityComparable = (not std::is_same_v<T, U> and requires(T lhs, U rhs) { lhs == rhs; })
-                             or (IsDefaultEqual<T, Comparer> and requires(T lhs, T rhs) { lhs == rhs; })
-                             or (not IsDefaultEqual<T, Comparer> and Comparable<T, Comparer>);
+concept EqualityComparable = (!std::is_same_v<T, U> && requires(T lhs, U rhs) { lhs == rhs; })
+                             || (IsDefaultEqual<T, Comparer> && requires(T lhs, T rhs) { lhs == rhs; })
+                             || (!IsDefaultEqual<T, Comparer> && Comparable<T, Comparer>);
 
 template<typename T>
 concept ContiguousContainer = requires(std::remove_cvref_t<T> t) {
@@ -57,10 +57,10 @@ concept ContiguousContainer = requires(std::remove_cvref_t<T> t) {
     { t.data() };
     { t.size() } -> std::convertible_to<u32>;
     { t.isEmpty() } -> std::convertible_to<bool>;
-} and T::isContiguousContainer;
+} && T::isContiguousContainer;
 
 template<typename T>
-concept ForwardContainer = ContiguousContainer<T> or requires(std::remove_cvref_t<T> t) {
+concept ForwardContainer = ContiguousContainer<T> || requires(std::remove_cvref_t<T> t) {
     { std::remove_cvref_t<T>::isForwardContainer } -> std::convertible_to<bool>;
     { t.begin() };
     { t.end() };
@@ -70,12 +70,12 @@ concept ForwardContainer = ContiguousContainer<T> or requires(std::remove_cvref_
 
 template<typename Container>
 concept ListLike = ContiguousContainer<Container>
-                   and std::is_default_constructible_v<Container>
-                   and std::is_move_constructible_v<Container>
-                   and requires(Container c) {
-                           { c.reserve(u32()) };
-                           { c.clear() };
-                       };
+                   && std::is_default_constructible_v<Container>
+                   && std::is_move_constructible_v<Container>
+                   && requires(Container c) {
+                          { c.reserve(u32()) };
+                          { c.clear() };
+                      };
 
 template<typename Container, typename Item>
 concept HasAddItem = requires(Container c, Item item) {
@@ -84,19 +84,19 @@ concept HasAddItem = requires(Container c, Item item) {
 
 template<typename T>
 concept StringLiteral =
-    std::is_same_v<char*, std::decay_t<T>> or std::is_same_v<const char*, std::decay_t<T>>;
+    std::is_same_v<char*, std::decay_t<T>> || std::is_same_v<const char*, std::decay_t<T>>;
 
 template<typename From, typename To>
 concept CanConstructStringView =
-    std::is_constructible_v<StringView, From> or (StringLiteral<From> and std::is_same_v<To, Any>);
+    std::is_constructible_v<StringView, From> || (StringLiteral<From> && std::is_same_v<To, Any>);
 
 template<typename T>
-concept StringOrStringView = std::is_same_v<T, String> or std::is_same_v<T, StringView>;
+concept StringOrStringView = std::is_same_v<T, String> || std::is_same_v<T, StringView>;
 
 template<typename T>
-concept SpanCompatible = not std::is_const_v<T>;
+concept SpanCompatible = !std::is_const_v<T>;
 
 template<typename T>
-concept MutableSpanCompatible = not std::is_const_v<T>;
+concept MutableSpanCompatible = !std::is_const_v<T>;
 } // namespace Concepts
 } // namespace Polly

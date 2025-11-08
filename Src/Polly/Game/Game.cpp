@@ -6,7 +6,6 @@
 #include "Polly/ContentManagement/ContentManager.hpp"
 #include "Polly/Game/GameImpl.hpp"
 #include "Polly/Graphics/PainterImpl.hpp"
-#include "Polly/Logging.hpp"
 
 namespace Polly
 {

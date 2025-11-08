@@ -39,22 +39,22 @@ namespace Concepts
 {
 template<typename T>
 concept SupportedByAny = std::is_same_v<T, char>
-                         or std::is_same_v<T, unsigned char>
-                         or std::is_same_v<T, short>
-                         or std::is_same_v<T, unsigned short>
-                         or std::is_same_v<T, int>
-                         or std::is_same_v<T, unsigned int>
-                         or std::is_same_v<T, float>
-                         or std::is_same_v<T, double>
-                         or std::is_same_v<T, bool>
-                         or std::is_same_v<T, Vec2>
-                         or std::is_same_v<T, Vec3>
-                         or std::is_same_v<T, Vec4>
-                         or std::is_same_v<T, Color>
-                         or std::is_same_v<T, Matrix>
-                         or std::is_same_v<T, String>
-                         or std::is_same_v<T, StringView>
-                         or std::is_same_v<T, void*>;
+                         || std::is_same_v<T, unsigned char>
+                         || std::is_same_v<T, short>
+                         || std::is_same_v<T, unsigned short>
+                         || std::is_same_v<T, int>
+                         || std::is_same_v<T, unsigned int>
+                         || std::is_same_v<T, float>
+                         || std::is_same_v<T, double>
+                         || std::is_same_v<T, bool>
+                         || std::is_same_v<T, Vec2>
+                         || std::is_same_v<T, Vec3>
+                         || std::is_same_v<T, Vec4>
+                         || std::is_same_v<T, Color>
+                         || std::is_same_v<T, Matrix>
+                         || std::is_same_v<T, String>
+                         || std::is_same_v<T, StringView>
+                         || std::is_same_v<T, void*>;
 
 template<typename T>
 concept AssignableToAny = SupportedByAny<std::remove_cvref_t<T>>;
