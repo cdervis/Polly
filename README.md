@@ -2,7 +2,7 @@
 
 # Polly
 
-<p><img title="Polly logo" src="Docs/assets/images/logo.svg" width="160" height="160"></p>
+<p><img title="Polly logo" src="Docs/docs/assets/images/logo.svg" width="160" height="160"></p>
 
 Minimalistic 2D C++ Game Framework
 
