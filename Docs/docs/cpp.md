@@ -1,3 +1,7 @@
+---
+icon: material/language-cpp
+---
+
 # C++ API Design
 
 This page explains how the Polly API is designed around C++ and some general advice on how to get the most out of it.
@@ -20,7 +24,7 @@ Every reference-counted object is made up of exactly one pointer, which is a poi
 
 This behavior matches that of [`std::shared_ptr`](https://en.cppreference.com/w/cpp/memory/shared_ptr).
 
-Although it would be wise to use `std::move` and pass-by-reference to pass objects around, the reference counting mechanism in Polly is very efficient (and unlike `std::shared_ptr`, not an atomic operation).
+Although it would be wise to use [`std::move`](https://en.cppreference.com/w/cpp/utility/move.html) and pass-by-reference to pass objects around, the reference counting mechanism in Polly is very efficient (and unlike [`std::shared_ptr`](https://en.cppreference.com/w/cpp/memory/shared_ptr), not an atomic operation).
 
 You can therefore simply pass Polly objects around by value without incurring any significant overhead.
 
@@ -28,16 +32,16 @@ It's important to note that a default-constructed object is always invalid and c
 
 Other types, such as scalar types like vectors, matrices and `GameTime` are **not reference-counted**; they're simply trivial types.
 
-If you're unsure whether a type is reference-counted, look at its declaration in the C++ header. Reference-counted types are denoted by their usage of the `pl_object()` macro.
+If you're unsure whether a type is reference-counted, look at its declaration in the C++ header. Reference-counted types are denoted by their usage of the `#!cpp PollyObject()` macro.
 
 ### Object Operators
 
 All Polly objects support operators `==`, `!=`, `<`, `<=`, `>` and `>=`, which compare the implementation pointers between
 two objects numerically.
 
-This means that, for example, `obj1 == obj2` will compare whether two objects point to the same internal object. In other words, whether they share a reference to the same object.
+This means that, for example, `#!cpp obj1 == obj2` will compare whether two objects point to the same internal object. In other words, whether they share a reference to the same object.
 
-An object can also be evaluated as a `bool`, where it returns true if it's a valid object.
+An object can also be evaluated as a `#!cpp bool`, where it returns true if it's a valid object.
 
 ```cpp
 auto img = Image(); // Default-constructed image

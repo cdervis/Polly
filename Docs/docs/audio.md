@@ -1,10 +1,14 @@
+---
+icon: lucide/audio-lines
+---
+
 # Audio
 
 Polly provides an easy-to-use, safe audio API.
 Compared to full-fledged audio engines like [FMOD](https://www.fmod.com) and [WWise](https://www.audiokinetic.com/en/wwise/overview/),
 Polly's audio API is rather simple, but powerful enough for most cases.
 
-The central type for audio playback is the `AudioDevice` class and can be obtained via `Game::audio()`.
+The central type for audio playback is the `AudioDevice` class and can be obtained via `#!cpp Game::audio()`.
 
 ## Sounds
 
@@ -15,7 +19,7 @@ Since assets are reference-counted objects, loading the same sound multiple time
 
 When all references to a sound vanish, the sound is automatically unloaded.
 
-Playing a sound is done using `AudioDevice::playOnce()`:
+Playing a sound is done using `#!cpp AudioDevice::playOnce()`:
 
 ```cpp
 auto sound = Sound("Boom.wav");
@@ -27,7 +31,7 @@ audio().playSoundOnce(sound, /*volume: */ 1.0f, /*pan: */ 0.0f, /*delay: */ none
 
 The playback of a sound can be controlled by capturing its virtual channel, represented by the `SoundChannel` class.
 
-The `AudioDevice::playSound()` method does exactly the same as `playOnce()`, but returns the sound's channel. Since a sound channel is reference-counted, the sound will play as long as the channel is referenced. Capturing a channel allows you, for example, to control the sound's volume, fade, playback speed, panning and looping afterwards.
+The `#!cpp AudioDevice::playSound()` method does exactly the same as `#!cpp playOnce()`, but returns the sound's channel. Since a sound channel is reference-counted, the sound will play as long as the channel is referenced. Capturing a channel allows you, for example, to control the sound's volume, fade, playback speed, panning and looping afterwards.
 
 ## Inaudible Behavior
 
@@ -36,17 +40,17 @@ The audio device has a fixed limit of sounds that can be played simultaneously.
 If there are too many sounds playing at once, it will kill some sounds based on a heuristic, for example whether a sound
 is inaudible among all of the other sounds.
 
-The `SoundInaudibleBehavior` enum defines what should happen with a channel in such a case and is set on a sound channel by using `SoundChannel::setInaudibleBehavior()`.
+The `SoundInaudibleBehavior` enum defines what should happen with a channel in such a case and is set on a sound channel by using `#!cpp SoundChannel::setInaudibleBehavior()`.
 
 ## Music
 
-`playOnce()` is typically used to play fire-and-forget sounds such as explosions or UI navigation.
+`#!cpp playOnce()` is typically used to play fire-and-forget sounds such as explosions or UI navigation.
 
-To play a continuous sound, such as music, a convenience method `AudioDevice::playSoundInBackground()` is provided.
+To play a continuous sound, such as music, a convenience method `#!cpp AudioDevice::playSoundInBackground()` is provided.
 
-::: callout info
-Polly makes no distinction between sounds and songs. All types are represented by the `Sound` class.
-:::
+!!! note
+
+    Polly makes no distinction between sounds and songs. All types are represented by the `Sound` class.
 
 Example:
 
@@ -57,9 +61,9 @@ auto song = Sound("Level1Song.mp3");
 auto channel = audio.playSoundInBackground(song);
 ```
 
-The song will play until it's finished, or if the channel object is not referenced anymore, or if it's programmatically stopped, for example by using `SoundChannel::setIsPaused()` or `AudioDevice::pauseAllSounds()`.
+The song will play until it's finished, or if the channel object is not referenced anymore, or if it's programmatically stopped, for example by using `#!cpp SoundChannel::setIsPaused()` or `#!cpp AudioDevice::pauseAllSounds()`.
 
-You could also let it loop using `channel.setIsLooping(true)`.
+You could also let it loop using `#!cpp channel.setIsLooping(true)`.
 
 ## Disabling the Audio Device
 

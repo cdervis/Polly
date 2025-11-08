@@ -6,6 +6,7 @@
 
 namespace Polly
 {
+/// Defines a keyboard scan code, which represents position-independent key information.
 enum class Scancode
 {
     Unknown                 = 0,

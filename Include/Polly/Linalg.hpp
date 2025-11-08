@@ -287,9 +287,16 @@ struct Matrix
 
     DefineDefaultEqualityOperations(Matrix);
 
+    /// The first row.
     Vec4 row1;
+
+    /// The second row.
     Vec4 row2;
+
+    /// The third row.
     Vec4 row3;
+
+    /// The fourth row.
     Vec4 row4;
 };
 } // namespace Polly

@@ -1,3 +1,7 @@
+---
+icon: material/copyright
+---
+
 # License
 
 Polly is available under a dual-license model.

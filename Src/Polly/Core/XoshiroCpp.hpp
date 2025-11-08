@@ -621,8 +621,6 @@ class Xoshiro128StarStar
 };
 } // namespace XoshiroCpp
 
-////////////////////////////////////////////////////////////////
-
 namespace XoshiroCpp
 {
 template<class Uint32, std::enable_if_t<std::is_same_v<Uint32, uint32_t>>*>
@@ -652,7 +650,6 @@ static constexpr uint32_t RotL(const uint32_t x, const int s) noexcept
 }
 } // namespace detail
 
-////////////////////////////////////////////////////////////////
 //
 //	SplitMix64
 //
@@ -702,7 +699,6 @@ inline constexpr void SplitMix64::deserialize(const state_type state) noexcept
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoshiro256+
 //
@@ -810,7 +806,6 @@ inline constexpr void Xoshiro256Plus::deserialize(const state_type state) noexce
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoshiro256++
 //
@@ -918,7 +913,6 @@ inline constexpr void Xoshiro256PlusPlus::deserialize(const state_type state) no
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoshiro256**
 //
@@ -1026,7 +1020,6 @@ inline constexpr void Xoshiro256StarStar::deserialize(const state_type state) no
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoroshiro128+
 //
@@ -1119,7 +1112,6 @@ inline constexpr void Xoroshiro128Plus::deserialize(const state_type state) noex
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoroshiro128++
 //
@@ -1212,7 +1204,6 @@ inline constexpr void Xoroshiro128PlusPlus::deserialize(const state_type state) 
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoroshiro128**
 //
@@ -1305,7 +1296,6 @@ inline constexpr void Xoroshiro128StarStar::deserialize(const state_type state) 
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoshiro128+
 //
@@ -1418,7 +1408,6 @@ inline constexpr void Xoshiro128Plus::deserialize(const state_type state) noexce
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoshiro128++
 //
@@ -1531,7 +1520,6 @@ inline constexpr void Xoshiro128PlusPlus::deserialize(const state_type state) no
     m_state = state;
 }
 
-////////////////////////////////////////////////////////////////
 //
 //	xoshiro128**
 //

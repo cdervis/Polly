@@ -2,25 +2,6 @@
 // This file is part of Polly, a minimalistic 2D C++ game framework.
 // For conditions of distribution and use, see copyright notice in LICENSE, or https://polly2d.org.
 
-// This file contains the `defer` macro which can be used to perform
-// guaranteed, arbitrary scope-based cleanup.
-//
-// Example usage:
-//
-// void someFunction()
-// {
-//     defer
-//     {
-//         logDebug("End of scope reached!");
-//     };
-//
-//     logDebug("Beginning some_function");
-// }
-//
-// Which would print the following:
-//   Beginning some_function
-//   End of scope reached!
-
 #pragma once
 
 #include "Polly/CopyMoveMacros.hpp"
@@ -89,6 +70,23 @@ DeferObject<Functor> operator+(DeferOperatorOverloadTag, Functor&& functor)
 #define deferNamed(name)                                                                                     \
     auto name = Polly::Details::DeferOperatorOverloadTag{} + [&]() // NOLINT(*-macro-parentheses)
 
+/// A macro used to perform guaranteed, arbitrary scope-based cleanup.
+///
+/// Example usage:
+///
+/// void someFunction()
+/// {
+///     defer
+///     {
+///         logDebug("End of scope reached!");
+///     };
+///
+///     logDebug("Beginning some_function");
+/// }
+///
+/// Which would print the following:
+///   Beginning some_function
+///   End of scope reached!
 #define defer deferNamed(POLLY_UNIQUE_NAME(DEFER_GUARD))
 
 // NOLINTEND

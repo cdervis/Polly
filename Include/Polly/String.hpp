@@ -18,6 +18,7 @@ enum class AnyType;
 template<typename T>
 class Maybe;
 
+/// Represents a char-based, dynamically resizable string.
 class String
 {
     friend ByteBlob;
@@ -28,16 +29,21 @@ class String
     static constexpr auto isForwardContainer    = true;
     static constexpr auto smallBufferSize       = 32u; // Including null-terminator.
 
+    /// Creates an empty string.
     constexpr String();
 
     constexpr String(Details::NoObjectTag);
 
+    /// Creates a string from a string literal.
     String(const char* str);
 
+    /// Constructor that forbids string construction from a null pointer.
     String(std::nullptr_t) = PollyDeleteWithReason("Constructing a String from a nullptr is invalid.");
 
+    /// Creates a string from a string literal and a specific size.
     explicit String(const char* str, u32 size);
 
+    /// Creates a string from a string view. The contents of the string view are copied.
     explicit String(StringView view);
 
     String(const String& other);
@@ -54,9 +60,19 @@ class String
 
     ~String() noexcept;
 
+    /// Creates a string that repeats a character a specific number of times.
+    ///
+    /// @param ch The character to repeat.
+    /// @param count The number of repetitions.
     [[nodiscard]]
     static String repeat(char ch, u32 count);
 
+    /// Creates a string that repeats a string a specific number of times, with an optional separator
+    /// between each repetition.
+    ///
+    /// @param str The string to repeat.
+    /// @param count The number of repetitions.
+    /// @param separator The string that separates the repetitions.
     [[nodiscard]]
     static String repeat(StringView str, u32 count, StringView separator = StringView());
 
@@ -66,6 +82,9 @@ class String
 
     void assign(const char* str, Maybe<u32> size);
 
+    /// Clears the contents of the string.
+    /// Note, this does **not** deallocate the string's memory.
+    /// It simply sets the string's size to zero and an appropriate null-terminating character.
     void clear();
 
     void reserve(u32 newCapacity);

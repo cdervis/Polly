@@ -4,7 +4,6 @@
 
 // This file uses code from the Guidelines Support Library by Microsoft, licensed under the MIT license:
 
-///////////////////////////////////////////////////////////////////////////////
 //
 // Copyright (c) 2015 Microsoft Corporation. All rights reserved.
 //
@@ -18,7 +17,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 

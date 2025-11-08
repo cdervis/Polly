@@ -38,13 +38,13 @@ void assumptionViolation(
 #ifdef __GNUC__
 
 #define assume(expr)                                                                                         \
-    if (not(expr))                                                                                           \
+    if (!(expr))                                                                                             \
     {                                                                                                        \
         ::Polly::Details::assumptionViolation(__FILE__, __PRETTY_FUNCTION__, __LINE__, #expr, "");           \
     }
 
 #define assumeWithMsg(expr, message)                                                                         \
-    if (not(expr))                                                                                           \
+    if (!(expr))                                                                                             \
     {                                                                                                        \
         ::Polly::Details::assumptionViolation(__FILE__, __PRETTY_FUNCTION__, __LINE__, #expr, message);      \
     }
@@ -52,13 +52,13 @@ void assumptionViolation(
 #else
 
 #define assume(expr)                                                                                         \
-    if (not(expr))                                                                                           \
+    if (!(expr))                                                                                             \
     {                                                                                                        \
         ::Polly::Details::assumptionViolation(__FILE__, __FUNCTION__, __LINE__, #expr, "");                  \
     }
 
 #define assumeWithMsg(expr, message)                                                                         \
-    if (not(expr))                                                                                           \
+    if (!(expr))                                                                                             \
     {                                                                                                        \
         ::Polly::Details::assumptionViolation(__FILE__, __FUNCTION__, __LINE__, #expr, message);             \
     }

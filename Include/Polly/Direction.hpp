@@ -6,7 +6,7 @@
 
 namespace Polly
 {
-/// Defines a generic direction.
+/// Defines a general direction.
 enum class Direction
 {
     Left  = 0,

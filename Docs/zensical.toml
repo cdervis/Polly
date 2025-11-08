@@ -1,0 +1,123 @@
+[project]
+site_name = "Polly"
+site_description = "Minimalistic 2D C++ Game Framework"
+site_author = "Cem Dervis"
+site_url = "https://polly2d.org"
+repo_url = "https://github.com/cdervis/Polly"
+repo_name = "cdervis/Polly"
+
+copyright = """
+Copyright &copy; 2025 <a href="https://dervis.de">Cem Dervis</a>
+"""
+
+extra_css = [
+    "stylesheets/extra.css",
+    "https://unpkg.com/katex@0/dist/katex.min.css"
+]
+
+extra_javascript = [
+    "javascripts/katex.js",
+    "https://unpkg.com/katex@0/dist/katex.min.js",
+    "https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"
+]
+
+nav = [
+    { "Home" = "index.md" },
+  { "Documentation" = [
+    { "Introduction" = "introduction.md" },
+    { "Game Structure" = "game-structure.md" },
+    { "Events" = "events.md" },
+    { "Timing" = "timing.md" },
+    { "Window" = "window.md" },
+    { "Logging" = "logging.md" },
+    { "Display" = "display.md" },
+    { "Dear ImGui" = "dear-imgui.md" },
+    { "Sprites" = "sprites.md" },
+    { "Samplers" = "samplers.md" },
+    { "Text" = "text.md" },
+    { "Transformations" = "transformations.md" },
+    { "Shading Language" = "shading-language.md" },
+    { "Custom Shaders" = "custom-shaders.md" },
+    { "Canvas" = "canvas.md" },
+    { "Particles" = "particles.md" },
+    { "Polygons" = "polygons.md" },
+    { "Meshes" = "meshes.md" },
+    { "Mouse" = "mouse.md" },
+    { "Keyboard" = "keyboard.md" },
+    { "Gamepad" = "gamepad.md" },
+    { "Touch" = "touch.md" },
+    { "Text Input" = "text-input.md" },
+    { "Math" = "math.md" },
+    { "Audio" = "audio.md" },
+    { "Algorithms" = "algorithms.md" },
+    { "Random" = "random.md" },
+    { "Tweening" = "tweening.md" },
+    { "API Design" = "cpp.md" },
+    { "Package Management" = "package-management.md" },
+    { "Publishing" = "publishing.md" },
+  ]},
+  { "About" = [
+    { "License" = "license.md" },
+    { "Imprint" = "imprint.md" },
+    { "Privacy" = "privacy.md" },
+  ]},
+  { "Community" = [
+    { "Contributing" = "contributing.md" },
+  ]},
+]
+
+[project.theme]
+
+favicon = "assets/images/favicon.ico"
+logo = "assets/logo256.png"
+language = "en"
+
+features = [
+    "announce.dismiss",
+    "content.code.annotate",
+    "content.code.copy",
+    "content.footnote.tooltips",
+    "content.tabs.link",
+    "content.tooltips",
+    "navigation.footer",
+    "navigation.instant",
+    "navigation.instant.prefetch",
+    "navigation.instant.progress",
+    "navigation.path",
+    "navigation.sections",
+    "navigation.top",
+    "navigation.tracking",
+    "navigation.tabs",
+    "search.highlight",
+    #"navigation.indexes",
+    #"toc.follow"
+    #"toc.integrate"
+    #"navigation.tabs.sticky",
+    #"navigation.prune",
+    #"header.autohide",
+    #"navigation.expand",
+    #"content.code.select",
+    #"content.action.edit",
+    #"content.action.view",
+]
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"
+
+[project.theme.font]
+text = "Funnel Sans"
+code = "Jetbrains Mono"
+
+[project.theme.icon]
+repo = "lucide/github"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/cdervis/Polly"

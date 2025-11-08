@@ -172,7 +172,8 @@ class Painter final
     /// If you're drawing large amounts of static text, you may want to use
     /// drawText() instead, which draws a pre-shaped text object.
     ///
-    /// @note This is a convenience function for drawString() that
+    /// @note
+    /// This is a convenience function for drawString() that
     /// draws a simple shadow underneath the actual text, with a slight offset.
     ///
     /// @param text The text to draw.
@@ -198,7 +199,8 @@ class Painter final
 
     /// Draws 2D text from a pre-created Text object.
     ///
-    /// @note This is a convenience function for Painter::drawText() that
+    /// @note
+    /// This is a convenience function for `Painter::drawText()` that
     /// draws a simple shadow underneath the actual text, with a slight offset.
     ///
     /// @param text The text object to draw.
@@ -225,7 +227,8 @@ class Painter final
 
     /// Draws a filled rounded rectangle.
     ///
-    /// @note This function produces polygons that can be shaded by
+    /// @note
+    /// This function produces polygons that can be shaded by
     /// the shader set via setPolygonShader().
     /// If such a polygon shader is set, the color parameter is
     /// passed onto that shader as a variable.
@@ -237,7 +240,8 @@ class Painter final
 
     /// Draws a non-filled ellipse.
     ///
-    /// @note This function produces polygons that can be shaded by
+    /// @note
+    /// This function produces polygons that can be shaded by
     /// the shader set via setPolygonShader().
     /// If such a polygon shader is set, the color parameter is
     /// passed onto that shader as a variable.
@@ -250,7 +254,8 @@ class Painter final
 
     /// Draws a filled ellipse.
     ///
-    /// @note This function produces polygons that can be shaded by
+    /// @note
+    /// This function produces polygons that can be shaded by
     /// the shader set via setPolygonShader().
     /// If such a polygon shader is set, the color parameter is
     /// passed onto that shader as a variable.

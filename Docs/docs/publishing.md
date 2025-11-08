@@ -1,3 +1,7 @@
+---
+icon: lucide/share-2
+---
+
 # Publishing
 
 This page outlines some basic rules to remember when deploying your game to other machines.
@@ -26,9 +30,9 @@ On macOS, your game will run without any necessary runtime installations. Polly 
 
 The **minimum required** macOS version for Polly is **13.5** (macOS Ventura).
 
-::: callout info
-In a future release, Polly will provide a command line tool that automatically builds and signs your game correctly for deployment on macOS.
-:::
+!!! note
+
+    In a future release, Polly will provide a command line tool that automatically builds and signs your game correctly for deployment on macOS.
 
 ## iOS
 
@@ -43,9 +47,9 @@ On iOS, your game will run out of the box. Polly uses Metal on iOS, which is alr
 
 The **minimum required** iOS version for Polly is **16.5**, which was released in May 2023 and is available for iPhone 8 and later (released in September 2017), and iPad 5th generation and later (released in March 2017).
 
-::: callout info
-In a future release, Polly will provide a command line tool that automatically builds and signs your game correctly for deployment on iOS.
-:::
+!!! note
+
+    In a future release, Polly will provide a command line tool that automatically builds and signs your game correctly for deployment on iOS.
 
 ## Linux
 
@@ -62,9 +66,10 @@ Depending on which compiler / toolchain you use to build your game, it might dep
 
 ## Android
 
-::: callout info
-Although Polly is already capable of running on Android, the Game Template is currently undergoing a refactoring in order to make it simpler to develop for Android.
 
-When that's done, this documentation will be updated accordingly.
-:::
+!!! note
 
+    Although Polly is already capable of running on Android, the Game Template is currently undergoing a refactoring in order to make it simpler to develop for Android.
+    
+    When that's done, this documentation will be updated accordingly.
+    

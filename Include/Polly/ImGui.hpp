@@ -156,14 +156,16 @@ enum class ImGuiTableColumnOpts
 /// This mirrors the Dear ImGui API with C++ idiomatic modernizations,
 /// tailored to be used with Polly exclusively.
 ///
-/// @note You can't create a valid ImGui object directly.
-///       Instead, you have to attach a callback function to the game's
-///       ImGui event using `Game::OnImGui()`.
+/// @note
+/// You can't create a valid ImGui object directly.
+/// Instead, you have to attach a callback function to the game's
+/// ImGui event using `Game::onImGui()`.
 ///
-///       The callback function then receives a valid ImGui object that
-///       you can use to perform ImGui drawing.
+/// The callback function then receives a valid ImGui object that
+/// you can use to perform ImGui drawing.
 ///
-/// @tip For detailed tutorials, visit https://github.com/ocornut/imgui/wiki.
+/// @tip
+/// For detailed tutorials, visit https://github.com/ocornut/imgui/wiki.
 class ImGui
 {
     PollyObject(ImGui);

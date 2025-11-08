@@ -32,8 +32,10 @@ class Error : public std::exception
 
     ~Error() noexcept override;
 
+    /// Gets the full message of the error.
     const char* what() const noexcept override;
 
+    /// Gets the full message of the error.
     StringView message() const;
 
   private:

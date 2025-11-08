@@ -1,6 +1,10 @@
+---
+icon: lucide/package-check
+---
+
 # Package Management
 
-The Polly game template includes [CPM](https://github.com/cpm-cmake/CPM.cmake), which is a simple package management script written entirely in CMake. CPM is able to fetch any library's source from a GitHub repository or arbitrary URL directly, and then expose the library's CMake target.
+The Polly game template includes [CPM](https://github.com/cpm-cmake/CPM.cmake), which is a simple package manager written entirely in CMake. CPM is able to fetch any library's source from a GitHub repository or arbitrary URL directly, and then expose the library's CMake target.
 
 CPM is easy to use and ensures that the same compiler and toolchain is used for the code of the game and its dependencies, which improves the portability of your game.
 
@@ -8,7 +12,7 @@ CPM is easy to use and ensures that the same compiler and toolchain is used for 
 
 To demonstrate how to include a third-party library in your game, let's include [entt](https://github.com/skypjack/entt), a high-performance Entity Component System (ECS) library for modern C++.
 
-Anywhere in your game's `CMakeLists.txt` (after `include(Misc/PackageManagement.cmake)`), write:
+Anywhere in your game's `#!cpp CMakeLists.txt` (after `#!cmake include(Misc/PackageManagement.cmake)`), write:
 
 ```cmake
 # Fetch entt and expose its CMake target

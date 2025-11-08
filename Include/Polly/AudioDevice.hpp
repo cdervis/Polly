@@ -15,8 +15,7 @@ class SoundChannel;
 
 /// Represents the system's audio device.
 ///
-/// The audio device is part of a game instance and therefore obtained
-/// using `Game::audioDevice()`.
+/// The audio device is part of a game instance and therefore obtained using `Game::audio()`.
 class AudioDevice final
 {
     PollyObject(AudioDevice);

@@ -1,6 +1,6 @@
 // Copyright (C) 2025 Cem Dervis
 // This file is part of Polly, a minimalistic 2D C++ game framework.
-// For conditions of distribution and use, see copyright notice in LICENSE, or https://polly2d.org.
+// For conditions of distribution && use, see copyright notice in LICENSE, or https://polly2d.org.
 
 // This file contains portions of code from the Beman Project.
 // https://github.com/bemanproject/optional
@@ -33,47 +33,53 @@ namespace Details
 {
 template<typename MaybeValue, typename From>
 concept ValueConstructibleFrom =
-    std::is_copy_constructible_v<MaybeValue> and std::is_constructible_v<MaybeValue, From>;
+    std::is_copy_constructible_v<MaybeValue> && std::is_constructible_v<MaybeValue, From>;
 
 template<class T, class U, class Other>
-concept MaybeEnableFromOther = not std::is_same_v<T, U>
-                               and std::is_constructible_v<T, Other>
-                               and not std::is_constructible_v<T, Maybe<U>&>
-                               and not std::is_constructible_v<T, Maybe<U>&&>
-                               and not std::is_constructible_v<T, const Maybe<U>&>
-                               and not std::is_constructible_v<T, const Maybe<U>&&>
-                               and not std::is_convertible_v<Maybe<U>&, T>
-                               and not std::is_convertible_v<Maybe<U>&&, T>
-                               and not std::is_convertible_v<const Maybe<U>&, T>
-                               and not std::is_convertible_v<const Maybe<U>&&, T>;
+concept MaybeEnableFromOther = !std::is_same_v<T, U>
+                               && std::is_constructible_v<T, Other>
+                               && !std::is_constructible_v<T, Maybe<U>&>
+                               && !std::is_constructible_v<T, Maybe<U>&&>
+                               && !std::is_constructible_v<T, const Maybe<U>&>
+                               && !std::is_constructible_v<T, const Maybe<U>&&>
+                               && !std::is_convertible_v<Maybe<U>&, T>
+                               && !std::is_convertible_v<Maybe<U>&&, T>
+                               && !std::is_convertible_v<const Maybe<U>&, T>
+                               && !std::is_convertible_v<const Maybe<U>&&, T>;
 
 template<class T, class U, class Other>
 concept MaybeEnableAssignFromOther = std::is_constructible_v<T, Other>
-                                     and std::is_assignable_v<T&, Other>
-                                     and not std::is_constructible_v<T, Maybe<U>&>
-                                     and not std::is_constructible_v<T, Maybe<U>&&>
-                                     and not std::is_constructible_v<T, const Maybe<U>&>
-                                     and not std::is_constructible_v<T, const Maybe<U>&&>
-                                     and not std::is_convertible_v<Maybe<U>&, T>
-                                     and not std::is_convertible_v<Maybe<U>&&, T>
-                                     and not std::is_convertible_v<const Maybe<U>&, T>
-                                     and not std::is_convertible_v<const Maybe<U>&&, T>
-                                     and not std::is_assignable_v<T&, Maybe<U>&>
-                                     and not std::is_assignable_v<T&, Maybe<U>&&>
-                                     and not std::is_assignable_v<T&, const Maybe<U>&>
-                                     and not std::is_assignable_v<T&, const Maybe<U>&&>;
+                                     && std::is_assignable_v<T&, Other>
+                                     && !std::is_constructible_v<T, Maybe<U>&>
+                                     && !std::is_constructible_v<T, Maybe<U>&&>
+                                     && !std::is_constructible_v<T, const Maybe<U>&>
+                                     && !std::is_constructible_v<T, const Maybe<U>&&>
+                                     && !std::is_convertible_v<Maybe<U>&, T>
+                                     && !std::is_convertible_v<Maybe<U>&&, T>
+                                     && !std::is_convertible_v<const Maybe<U>&, T>
+                                     && !std::is_convertible_v<const Maybe<U>&&, T>
+                                     && !std::is_assignable_v<T&, Maybe<U>&>
+                                     && !std::is_assignable_v<T&, Maybe<U>&&>
+                                     && !std::is_assignable_v<T&, const Maybe<U>&>
+                                     && !std::is_assignable_v<T&, const Maybe<U>&&>;
 
 template<class T, class U>
 concept MaybeEnableForwardValue =
-    not std::is_same_v<std::decay_t<U>, Maybe<T>> and std::is_constructible_v<T, U&&>;
+    !std::is_same_v<std::decay_t<U>, Maybe<T>> && std::is_constructible_v<T, U&&>;
 
 #ifdef __cpp_lib_reference_from_temporary
 using std::reference_constructs_from_temporary_v;
 using std::reference_converts_from_temporary_v;
 #else
 template<class To, class From>
-concept reference_converts_from_temporary_v = std::is_reference_v<To>
-                                              and ((not std::is_reference_v<From> and std::is_convertible_v<std::remove_cvref_t<From>*, std::remove_cvref_t<To>*>) or (std::is_lvalue_reference_v<To> and std::is_const_v<std::remove_reference_t<To>> and std::is_convertible_v<From, const std::remove_cvref_t<To>&&> and not std::is_convertible_v<From, std::remove_cvref_t<To>&>));
+concept reference_converts_from_temporary_v =
+    std::is_reference_v<To>
+    && ((!std::is_reference_v<From>
+         && std::is_convertible_v<std::remove_cvref_t<From>*, std::remove_cvref_t<To>*>)
+        || (std::is_lvalue_reference_v<To>
+            && std::is_const_v<std::remove_reference_t<To>>
+            && std::is_convertible_v<From, const std::remove_cvref_t<To>&&>
+            && !std::is_convertible_v<From, std::remove_cvref_t<To>&>));
 
 template<class To, class From>
 concept reference_constructs_from_temporary_v =
@@ -85,12 +91,17 @@ concept reference_constructs_from_temporary_v =
 
 // NOLINTBEGIN
 
+/// Represents a type that either stores or does not store a value.
+///
+/// A Maybe object is used to indicate that e.g. a function parameter or function return value
+/// may be optional or empty.
+///
+/// Accessing an empty Maybe object results in an exception being thrown.
 template<typename T>
 class Maybe
 {
-    static_assert(not std::is_same_v<std::remove_cv_t<T>, Details::NoObjectTag>);
-
-    static_assert(std::is_object_v<T> and not std::is_array_v<T>);
+    static_assert(!std::is_same_v<std::remove_cv_t<T>, Details::NoObjectTag>);
+    static_assert(std::is_object_v<T> && !std::is_array_v<T>);
 
   public:
     using value_type = T;
@@ -133,10 +144,10 @@ class Maybe
     constexpr Maybe& operator=(const Maybe& copyFrom)
     requires(
         std::is_copy_constructible_v<T>
-        and std::is_copy_constructible_v<T>
-        and not std::is_trivially_copy_assignable_v<T>)
+        && std::is_copy_constructible_v<T>
+        && !std::is_trivially_copy_assignable_v<T>)
     {
-        if (not copyFrom)
+        if (!copyFrom)
         {
             destruct<true>();
         }
@@ -152,23 +163,23 @@ class Maybe
         return *this;
     }
 
-    // Copy-assignment for trivial types
+    /// Copy-assignment for trivial types
     constexpr Maybe& operator=(const Maybe& copyFrom)
     requires(std::is_copy_constructible_v<T>
              && std::is_copy_constructible_v<T>
              && std::is_trivially_copy_assignable_v<T>)
     = default;
 
-    // Move constructor for trivial types
+    /// Move constructor for trivial types
     constexpr Maybe(Maybe&&) noexcept
     requires(std::is_move_constructible_v<T>
-             and std::is_trivially_move_constructible_v<T>
-             and std::is_trivially_move_assignable_v<T>)
+             && std::is_trivially_move_constructible_v<T>
+             && std::is_trivially_move_assignable_v<T>)
     = default;
 
-    // Move constructor for non-trivial types
+    /// Move constructor for non-trivial types
     constexpr Maybe(Maybe&& moveFrom) noexcept
-    requires(std::is_move_constructible_v<T> and not std::is_trivially_move_constructible_v<T>)
+    requires(std::is_move_constructible_v<T> && !std::is_trivially_move_constructible_v<T>)
         : _isActive(false)
     {
         if (moveFrom)
@@ -177,14 +188,14 @@ class Maybe
         }
     }
 
-    // Move-assignment for non-trivial types
+    /// Move-assignment for non-trivial types
     constexpr Maybe& operator=(Maybe&& moveFrom) noexcept
     requires(
         std::is_move_constructible_v<T>
-        and std::is_move_assignable_v<T>
-        and not std::is_trivially_move_assignable_v<T>)
+        && std::is_move_assignable_v<T>
+        && !std::is_trivially_move_assignable_v<T>)
     {
-        if (not moveFrom)
+        if (!moveFrom)
         {
             destruct<true>();
         }
@@ -200,11 +211,11 @@ class Maybe
         return *this;
     }
 
-    // Move-assignment for trivial types
+    /// Move-assignment for trivial types
     constexpr Maybe& operator=(Maybe&&) noexcept
     requires(std::is_move_constructible_v<T>
-             and std::is_move_assignable_v<T>
-             and std::is_trivially_move_assignable_v<T>)
+             && std::is_move_assignable_v<T>
+             && std::is_trivially_move_assignable_v<T>)
     = default;
 
     template<typename U>
@@ -225,9 +236,9 @@ class Maybe
 
     template<typename U>
     requires(
-        not std::is_same_v<Maybe, std::decay_t<U>>
-        and std::is_constructible_v<T, U>
-        and std::is_assignable_v<T&, U>)
+        !std::is_same_v<Maybe, std::decay_t<U>>
+        && std::is_constructible_v<T, U>
+        && std::is_assignable_v<T&, U>)
     constexpr Maybe& operator=(U&& value)
     {
         if (_isActive)
@@ -323,7 +334,7 @@ class Maybe
     }
 
     constexpr ~Maybe() noexcept
-    requires(std::is_trivially_destructible_v<T>)
+    requires std::is_trivially_destructible_v<T>
     = default;
 
     constexpr ~Maybe() noexcept
@@ -462,9 +473,9 @@ class Maybe<T&>
     template<class U>
     requires(
         std::is_constructible_v<T&, U>
-        and not std::is_same_v<std::remove_cvref_t<U>, Maybe>
-        and not Details::reference_constructs_from_temporary_v<T&, U>)
-    constexpr explicit(not std::is_convertible_v<U, T&>)
+        && !std::is_same_v<std::remove_cvref_t<U>, Maybe>
+        && !Details::reference_constructs_from_temporary_v<T&, U>)
+    constexpr explicit(!std::is_convertible_v<U, T&>)
         Maybe(U&& u) noexcept(std::is_nothrow_constructible_v<T&, U>)
     {
         convertRefInitValue(std::forward<U>(u));
@@ -472,17 +483,17 @@ class Maybe<T&>
 
     template<class U>
     requires(std::is_constructible_v<T&, U>
-             and not std::is_same_v<std::remove_cvref_t<U>, Maybe>
-             and Details::reference_constructs_from_temporary_v<T&, U>)
+             && !std::is_same_v<std::remove_cvref_t<U>, Maybe>
+             && Details::reference_constructs_from_temporary_v<T&, U>)
     constexpr Maybe(U&& u) = delete;
 
     template<class U>
     requires(
         std::is_constructible_v<T&, U&>
-        and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-        and not std::is_same_v<T&, U>
-        and not Details::reference_constructs_from_temporary_v<T&, U&>)
-    constexpr explicit(not std::is_convertible_v<U&, T&>) Maybe(Maybe<U>& rhs) noexcept
+        && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+        && !std::is_same_v<T&, U>
+        && !Details::reference_constructs_from_temporary_v<T&, U&>)
+    constexpr explicit(!std::is_convertible_v<U&, T&>) Maybe(Maybe<U>& rhs) noexcept
     {
         if (rhs)
         {
@@ -493,10 +504,10 @@ class Maybe<T&>
     template<class U>
     requires(
         std::is_constructible_v<T&, const U&>
-        and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-        and not std::is_same_v<T&, U>
-        and not Details::reference_constructs_from_temporary_v<T&, const U&>)
-    constexpr explicit(not std::is_convertible_v<const U&, T&>) Maybe(const Maybe<U>& rhs) noexcept
+        && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+        && !std::is_same_v<T&, U>
+        && !Details::reference_constructs_from_temporary_v<T&, const U&>)
+    constexpr explicit(!std::is_convertible_v<const U&, T&>) Maybe(const Maybe<U>& rhs) noexcept
     {
         if (rhs)
         {
@@ -507,10 +518,10 @@ class Maybe<T&>
     template<class U>
     requires(
         std::is_constructible_v<T&, U>
-        and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-        and not std::is_same_v<T&, U>
-        and not Details::reference_constructs_from_temporary_v<T&, U>)
-    constexpr explicit(not std::is_convertible_v<U, T&>) Maybe(Maybe<U>&& rhs) noexcept
+        && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+        && !std::is_same_v<T&, U>
+        && !Details::reference_constructs_from_temporary_v<T&, U>)
+    constexpr explicit(!std::is_convertible_v<U, T&>) Maybe(Maybe<U>&& rhs) noexcept
     {
         if (rhs)
         {
@@ -521,10 +532,10 @@ class Maybe<T&>
     template<class U>
     requires(
         std::is_constructible_v<T&, const U>
-        and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-        and not std::is_same_v<T&, U>
-        and not Details::reference_constructs_from_temporary_v<T&, const U>)
-    constexpr explicit(not std::is_convertible_v<const U, T&>) Maybe(const Maybe<U>&& rhs) noexcept
+        && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+        && !std::is_same_v<T&, U>
+        && !Details::reference_constructs_from_temporary_v<T&, const U>)
+    constexpr explicit(!std::is_convertible_v<const U, T&>) Maybe(const Maybe<U>&& rhs) noexcept
     {
         if (rhs)
         {
@@ -534,30 +545,30 @@ class Maybe<T&>
 
     template<class U>
     requires(std::is_constructible_v<T&, U&>
-             and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-             and not std::is_same_v<T&, U>
-             and Details::reference_constructs_from_temporary_v<T&, U&>)
+             && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+             && !std::is_same_v<T&, U>
+             && Details::reference_constructs_from_temporary_v<T&, U&>)
     constexpr Maybe(Maybe<U>&) = delete;
 
     template<class U>
     requires(std::is_constructible_v<T&, const U&>
-             and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-             and not std::is_same_v<T&, U>
-             and Details::reference_constructs_from_temporary_v<T&, const U&>)
+             && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+             && !std::is_same_v<T&, U>
+             && Details::reference_constructs_from_temporary_v<T&, const U&>)
     constexpr Maybe(const Maybe<U>&) = delete;
 
     template<class U>
     requires(std::is_constructible_v<T&, U>
-             and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-             and not std::is_same_v<T&, U>
-             and Details::reference_constructs_from_temporary_v<T&, U>)
+             && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+             && !std::is_same_v<T&, U>
+             && Details::reference_constructs_from_temporary_v<T&, U>)
     constexpr Maybe(Maybe<U>&&) = delete;
 
     template<class U>
     requires(std::is_constructible_v<T&, const U>
-             and not std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
-             and not std::is_same_v<T&, U>
-             and Details::reference_constructs_from_temporary_v<T&, const U>)
+             && !std::is_same_v<std::remove_cv_t<T>, Maybe<U>>
+             && !std::is_same_v<T&, U>
+             && Details::reference_constructs_from_temporary_v<T&, const U>)
     constexpr Maybe(const Maybe<U>&&) = delete;
 
     constexpr void swap(Maybe& rhs) noexcept
@@ -722,7 +733,7 @@ requires requires { bool(lhs >= *rhs); };
 
 template<typename T>
 constexpr void swap(Maybe<T>& lhs, Maybe<T>& rhs) noexcept
-requires(std::is_move_constructible_v<T> and std::is_swappable_v<T>)
+requires(std::is_move_constructible_v<T> && std::is_swappable_v<T>)
 {
     lhs.swap(rhs);
 }

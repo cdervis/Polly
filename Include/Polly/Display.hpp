@@ -84,10 +84,19 @@ enum class DisplayOrientation
 /// Stores information about a connected display.
 struct Display
 {
+    /// The ID of the display.
     u32                id;
+
+    /// The display's current mode, if any.
     Maybe<DisplayMode> currentMode;
+
+    /// The list of available modes for this display.
     List<DisplayMode>  modes;
+
+    /// The display's current orientation.
     DisplayOrientation orientation;
+
+    /// The current content scale factor.
     float              contentScale;
 };
 } // namespace Polly

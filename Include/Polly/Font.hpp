@@ -18,13 +18,13 @@ using GlyphAction = Function<bool(char32_t codepoint, const Rectangle& rect)>;
 
 /// Represents a font to draw simple text.
 ///
-/// Fonts can be drawn using Painter::drawString() and Painter::drawText() function.
+/// Fonts can be drawn using `Painter::drawString()` and `Painter::drawText()` function.
 class Font final
 {
     PollyObject(Font);
 
   public:
-    /// Lazily loads a Font object from the storage.
+    /// Lazily loads a font from the storage.
     ///
     /// @param assetName The name of the font in the asset storage.
     ///
@@ -33,9 +33,9 @@ class Font final
     /// @name From asset storage
     explicit Font(StringView assetName);
 
-    /// Loads a Font object from memory.
+    /// Creates a font from memory.
     ///
-    /// @param data The font data to load.
+    /// @param data The data of the font.
     ///
     /// @throw Error If the font wasn't able to be created, i.e. due to invalid data.
     ///

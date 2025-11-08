@@ -54,9 +54,10 @@ class Tweener
 
     /// Updates the tweener's playback.
     ///
-    /// @note If the tweener is not running or has reached its target,
-    ///       this has no effect. In that case, call start()
-    ///       or restart() to resume playback.
+    /// @note
+    /// If the tweener is not running or has reached its target,
+    /// this has no effect. In that case, call start()
+    /// or restart() to resume playback.
     void update(float elapsedTime);
 
     /// Stops the tweener's playback.
@@ -87,10 +88,11 @@ class Tweener
 
     /// Gets a value indicating whether the tweener is running.
     ///
-    /// @note This does not mean that the tweener is updating itself automatically.
-    ///         It instead means that when the tweener is not running (i.e. no resume()
-    ///         was called), that calls to update() will be ignored. It is still your
-    ///         responsibility to update the tweener manually using update().
+    /// @note
+    /// This does not mean that the tweener is updating itself automatically.
+    /// It instead means that when the tweener is not running (i.e. no resume()
+    /// was called), that calls to update() will be ignored. It is still your
+    /// responsibility to update the tweener manually using update().
     bool isRunning() const;
 
     /// Gets a value indicating whether the tweener has reached its target value.

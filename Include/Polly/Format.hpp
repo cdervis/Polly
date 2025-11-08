@@ -35,6 +35,14 @@ static void formatHelper(String& buffer, StringView& str, const T& value)
 }
 } // namespace Details
 
+/// Formats a string using an arbitrary number of arguments.
+///
+/// Example:
+///
+/// auto str = formatString("Hello {}! {}, {}", "World", 10, Vec2(1, 2));
+/// -> "Hello World! 10, [x=1; y=2]"
+///
+/// Currently, the only supported format specifier is '{}'.
 template<typename... Args>
 [[nodiscard]]
 static String formatString(StringView fmt, Args&&... args)

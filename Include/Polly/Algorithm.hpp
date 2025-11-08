@@ -16,6 +16,9 @@ namespace Polly
 {
 class StringView;
 
+/// Gets the index of a value in a container.
+///
+/// If the value was not found, an empty Maybe is returned.
 template<Concepts::ForwardContainer Container, typename T>
 static constexpr Maybe<u32> indexOf(const Container& container, const T& value)
 {
@@ -32,6 +35,9 @@ static constexpr Maybe<u32> indexOf(const Container& container, const T& value)
     return none;
 }
 
+/// Gets the first index in a container that satisfies a predicate.
+///
+/// If no element in the container satisfies the predicate, an empty Maybe is returned.
 template<Concepts::ForwardContainer Container, typename Predicate>
 constexpr Maybe<u32> indexOfWhere(const Container& container, Predicate&& predicate)
 {

@@ -85,9 +85,10 @@ class Game
 
     /// Gets the currently measured time of the game.
     ///
-    /// @note This time is measured once per game tick, meaning that multiple calls to
-    ///       this function in consecutive order (before the next game tick) will yield
-    ///        the same result.
+    /// @note
+    /// This time is measured once per game tick, meaning that multiple calls to
+    /// this function in consecutive order (before the next game tick) will yield
+    /// the same result.
     GameTime time() const;
 
     /// Gets the main window of the game.
@@ -105,10 +106,11 @@ class Game
     /// This is useful for when you want to load a custom asset type, or process
     /// an asset in a special way.
     ///
-    /// @note The loaded data isn't cached. This means that calling this function
-    ///       with the same asset name multiple times will load the asset's data each time.
-    ///       If you want to cache the asset's data, you might want employ some form of a cache
-    ///       of your own, for example using SortedMap.
+    /// @note
+    /// The loaded data isn't cached. This means that calling this function
+    /// with the same asset name multiple times will load the asset's data each time.
+    /// If you want to cache the asset's data, you might want employ some form of a cache
+    /// of your own, for example using SortedMap.
     ///
     /// @param name The name of the asset.
     [[nodiscard]]
@@ -130,9 +132,10 @@ class Game
     ///
     /// @param nanoseconds The number of nanoseconds to wait before returning.
     ///
-    /// @note Although this function attempts to wait as closely to the specified time
-    ///       as possible, the exact duration can't be guaranteed, meaning that this function may
-    ///       return with a slight delay.
+    /// @note
+    /// Although this function attempts to wait as closely to the specified time
+    /// as possible, the exact duration can't be guaranteed, meaning that this function may
+    /// return with a slight delay.
     static void sleep(u64 nanoseconds);
 
     /// Tells the game to wait for a specific number of milliseconds.
@@ -140,8 +143,9 @@ class Game
     ///
     /// @param milliseconds The number of milliseconds to wait before returning.
     ///
-    /// @note The exact duration can't be guaranteed, meaning that this function may
-    ///       return with a slight delay.
+    /// @note
+    /// The exact duration can't be guaranteed, meaning that this function may
+    /// return with a slight delay.
     static void sleepMs(u32 milliseconds);
 
     /// Gets the framerate to which the game should be limited.
@@ -163,7 +167,8 @@ class Game
     /// Requests that the next game frame (Game::draw() call) should be captured
     /// by the rendering backend for further inspection.
     ///
-    /// @note This is currently only implemented on Apple platforms.
+    /// @note
+    /// This is currently only implemented on Apple platforms.
     void requestFrameCapture();
 
     /// Sets the default game title and company name if none was specified in the Game constructor.

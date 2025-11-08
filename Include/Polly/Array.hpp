@@ -20,6 +20,7 @@ namespace Details
 void throwArrayIndexOutOfRangeException(u32 index, u32 n);
 } // namespace Details
 
+/// Represents a fixed-size array of an arbitrary data type.
 template<typename T, u32 N>
 requires(N > 0)
 struct Array
@@ -113,6 +114,9 @@ struct Array
         return items[N - 1];
     }
 
+    /// Fills the array with a specific value.
+    ///
+    /// The value is copied for each entry in the array.
     constexpr void fill(const T& value)
     {
         for (auto& item : *this)
