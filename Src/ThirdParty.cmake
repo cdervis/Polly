@@ -21,15 +21,30 @@ CPMAddPackage(
     VERSION v3.2.20-1
     URL https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.2.26.zip
     OPTIONS
-    "SDL_STATIC ON"
-    "SDL_CLOCK_GETTIME OFF"
-    "SDL_DISABLE_INSTALL ON"
-    "SDL_DISABLE_UNINSTALL ON"
-    "SDL_DIALOG OFF"
     "SDL_OPENGL ${polly_have_gfx_opengl}"
     "SDL_VULKAN ${polly_have_gfx_vulkan}"
     "SDL_METAL ${polly_have_gfx_metal}"
+    "SDL_INSTALL OFF"
+    "SDL_UNINSTALL OFF"
+    "SDL_INSTALL_CPACK OFF"
+    "SDL_INSTALL_DOCS OFF"
+    "SDL_DISABLE_INSTALL ON"
+    "SDL_DISABLE_UNINSTALL ON"
+    "SDL_ANDROID_JAR OFF"
+    "SDL_ASSERTIONS disabled"
+    "SDL_STATIC ON"
+    "SDL_SHARED OFF"
+    "SDL_CAMERA OFF"
+    "SDL_AUDIO OFF"
+    "SDL_RENDER OFF"
+    "SDL_CLOCK_GETTIME OFF"
+    "SDL_DIALOG OFF"
     "SDL_OFFSCREEN OFF"
+    "SDL_DISKAUDIO OFF"
+    "SDL_DUMMYAUDIO OFF"
+    "SDL_DIRECTX OFF"
+    "SDL_VIVANTE OFF"
+    "SDL_EXAMPLES OFF"
 )
 
 target_link_libraries(Polly PRIVATE SDL3-static)
