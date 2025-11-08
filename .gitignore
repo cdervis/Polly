@@ -21,3 +21,4 @@ docs/api/
 ImGui.ini
 .idea/
 .download_cache/
+.qtcreator/

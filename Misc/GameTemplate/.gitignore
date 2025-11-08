@@ -6,3 +6,4 @@ _[bB]uild/
 .zed/
 cmake-build-*/
 out/
+.qtcreator/
