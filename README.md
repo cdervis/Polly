@@ -19,7 +19,7 @@ Polly is a framework that makes it easy to get started with C++ 2D game developm
 
 It provides every audiovisual aspect necessary to comfortably make a 2D game using a code-only approach. 
 
-![Cover image](Docs/assets/images/cover-1.webp)
+![Cover image](Docs/docs/assets/images/cover-1.webp)
 
 > [!NOTE]  
 > Polly is currently in early development. Some things might be broken, not documented and many things change frequently.
