@@ -25,7 +25,6 @@ nav = [
   { "Home" = "index.md" },
   { "Documentation" = [
     { "Introduction" = "introduction.md" },
-    { "Demos" = "demos.md" },
     { "Game Structure" = "game-structure.md" },
     { "Events" = "events.md" },
     { "Timing" = "timing.md" },
