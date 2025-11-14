@@ -68,8 +68,10 @@ MetalPainter::MetalPainter(Window::Impl& windowImpl, GamePerformanceStats& perfo
 
     // Determine capabilities.
     // https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf
-    auto caps = PainterCapabilities();
+    auto caps = GraphicsDeviceCapabilities();
     {
+        caps.deviceName = _mtlDevice->name()->utf8String();
+
         if (_mtlDevice->supportsFamily(MTL::GPUFamilyApple3))
         {
             caps.maxImageExtent = 16384;

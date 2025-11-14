@@ -1110,7 +1110,7 @@ Vec2 Painter::Impl::currentCanvasSize() const
     return _viewport.size();
 }
 
-PainterCapabilities Painter::Impl::capabilities() const
+GraphicsDeviceCapabilities Painter::Impl::capabilities() const
 {
     return _capabilities;
 }
@@ -1121,11 +1121,11 @@ Window::Impl& Painter::Impl::window() const
 }
 
 void Painter::Impl::postInit(
-    const PainterCapabilities& capabilities,
-    u32                        maxFramesInFlight,
-    u32                        maxSpriteBatchSize,
-    u32                        maxPolyVertices,
-    u32                        maxMeshVertices)
+    const GraphicsDeviceCapabilities& capabilities,
+    u32                               maxFramesInFlight,
+    u32                               maxSpriteBatchSize,
+    u32                               maxPolyVertices,
+    u32                               maxMeshVertices)
 {
     assume(maxFramesInFlight > 0);
     assume(maxFramesInFlight <= _frameData.size());

@@ -45,8 +45,9 @@ enum class ImageFileFormat
 ///
 /// Graphics capabilities may be used to determine certain limits
 /// of the graphics device, i.e. before creating images of a specific size or format.
-struct PainterCapabilities
+struct GraphicsDeviceCapabilities
 {
+    String deviceName;
     u32 maxImageExtent  = 0;
     u32 maxCanvasWidth  = 0;
     u32 maxCanvasHeight = 0;
@@ -374,7 +375,7 @@ class Painter final
     float pixelRatio() const;
 
     /// Gets the device's capabilities.
-    PainterCapabilities capabilities() const;
+    GraphicsDeviceCapabilities capabilities() const;
 
     /// Gets the name of the graphics API that's used on the current platform.
     static StringView backendName();

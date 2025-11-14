@@ -240,7 +240,7 @@ class Painter::Impl : public Object
 
     virtual void requestFrameCapture() = 0;
 
-    PainterCapabilities capabilities() const;
+    GraphicsDeviceCapabilities capabilities() const;
 
     template<size_t SpriteCount>
     static auto createSpriteIndicesList();
@@ -284,11 +284,11 @@ class Painter::Impl : public Object
     Window::Impl& window() const;
 
     void postInit(
-        const PainterCapabilities& capabilities,
-        u32                        maxFramesInFlight,
-        u32                        maxSpriteBatchSize,
-        u32                        maxPolyVertices,
-        u32                        maxMeshVertices);
+        const GraphicsDeviceCapabilities& capabilities,
+        u32                               maxFramesInFlight,
+        u32                               maxSpriteBatchSize,
+        u32                               maxPolyVertices,
+        u32                               maxMeshVertices);
 
     void preBackendDtor();
 
@@ -387,7 +387,7 @@ class Painter::Impl : public Object
     GamePerformanceStats&   _performanceStats;
     Image                   _whiteImage;
     Array<FrameData, 3>     _frameData;
-    PainterCapabilities     _capabilities;
+    GraphicsDeviceCapabilities _capabilities;
     u32                     _maxFramesInFlight  = 0;
     u32                     _maxSpriteBatchSize = 0;
     u32                     _maxPolyVertices    = 0;

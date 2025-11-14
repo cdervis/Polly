@@ -457,7 +457,7 @@ float Painter::pixelRatio() const
     return impl->pixelRatio();
 }
 
-PainterCapabilities Painter::capabilities() const
+GraphicsDeviceCapabilities Painter::capabilities() const
 {
     PollyDeclareThisImpl;
     return impl->capabilities();
