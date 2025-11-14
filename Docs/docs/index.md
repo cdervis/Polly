@@ -250,7 +250,7 @@ hide:
                 <div class="feature-text">
                     <strong>Efficient 2D Rendering</strong>
                     <p>
-                    Automatic batching and direct use of the platform's native graphics API, such as Vulkan and Metal. 
+                    Automatic batching and direct use of the platform's native graphics API such as Direct3D, OpenGL and Metal. 
                     </p>
                 </div>
             </div>
@@ -345,6 +345,7 @@ hide:
         
     </div>
     <div class="preview-side">
-        <img class="cover-image" src="assets/cover.webp">
+        <img class="cover-image" src="assets/cover.webp#only-light">
+        <img class="cover-image" src="assets/cover-dark.webp#only-dark">
     </div>
 </div>

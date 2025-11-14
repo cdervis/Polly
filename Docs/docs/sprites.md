@@ -10,17 +10,12 @@ In Polly, `#!cpp Painter::drawSprite()` responsible for this.
 
 There are two versions of `#!cpp drawSprite()` available:
 
-```cpp
-1) void drawSprite(Image image, Vec2 position, Color color = white);
+1. `#!cpp void drawSprite(Image image, Vec2 position, Color color = white)`
+2. `#!cpp void drawSprite(Sprite sprite)`
 
-2) void drawSprite(Sprite sprite);
-```
+Version 1 is a convenience method for version 2; they both perform the same action. We will focus on version 2, which takes a single `Sprite` parameter and therefore provides more options.
 
-Version 1 is merely a convenience method for version 2; they both perform the same action. We will focus on version 2, which takes a single `Sprite` parameter and therefore provides more options.
-
-The `Sprite` structure is defined as:
-
-```cpp
+```cpp title="Definition of the Sprite structure"
 struct Sprite
 {
     Image            image;
@@ -35,12 +30,9 @@ struct Sprite
 ```
 
 !!! note
-
     All coordinates and sizes in `Sprite` are expressed in **pixels**.
 
-Example for `#!cpp drawSprite()`:
-
-```cpp
+```cpp title="Drawing a sprite"
 struct MyGame : Game
 {
     Image myImage = Image("myImage.png");

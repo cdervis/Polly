@@ -7,9 +7,8 @@
 Minimalistic 2D C++ Game Framework
 
 [![Homepage](https://img.shields.io/badge/Homepage-polly2d.org-blue)](https://polly2d.org) &nbsp;
-[![Homepage](https://img.shields.io/badge/Get%20Started-29B24F)](#getting-started) &nbsp;
+[![Docs](https://img.shields.io/badge/Get%20Started-29B24F)](https://polly2d.org/introduction) &nbsp;
 [![License](https://img.shields.io/badge/license-GPLv3-green)](https://github.com/cdervis/Polly/blob/main/LICENSE.md) &nbsp;
-[![Build](https://github.com/cdervis/Polly/actions/workflows/build.yaml/badge.svg)](https://github.com/cdervis/Polly/actions/workflows/build.yaml)
 
 </div>
 
@@ -73,7 +72,7 @@ struct MyGame final : Game
 
 - **Modern C++**: Improved C++ types and containers, providing an ergonomic API and safety guarantees by default.
 
-- **Modern 2D Renderer**: Efficient 2D rendering using the platform's native graphics API, such as Vulkan and Metal.
+- **Modern 2D Renderer**: Efficient 2D rendering using the platform's native graphics API such as Direct3D, OpenGL and Metal.
 
 - **Audio**: Easy-to-use audio API, including faders and channels for playback control.
 

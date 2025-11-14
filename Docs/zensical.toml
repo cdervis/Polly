@@ -25,8 +25,8 @@ nav = [
   { "Home" = "index.md" },
   { "Documentation" = [
     { "Introduction" = "introduction.md" },
-    { "Game Structure" = "game-structure.md" },
     { "Demos" = "demos.md" },
+    { "Game Structure" = "game-structure.md" },
     { "Events" = "events.md" },
     { "Timing" = "timing.md" },
     { "Window" = "window.md" },
@@ -37,12 +37,14 @@ nav = [
     { "Samplers" = "samplers.md" },
     { "Text" = "text.md" },
     { "Transformations" = "transformations.md" },
-    { "Shading Language" = "shading-language.md" },
-    { "Custom Shaders" = "custom-shaders.md" },
-    { "Canvas" = "canvas.md" },
-    { "Particles" = "particles.md" },
-    { "Polygons" = "polygons.md" },
-    { "Meshes" = "meshes.md" },
+    { "Advanced Graphics" = [
+      { "Shading Language" = "shading-language.md" },
+      { "Custom Shaders" = "custom-shaders.md" },
+      { "Canvas" = "canvas.md" },
+      { "Particles" = "particles.md" },
+      { "Polygons" = "polygons.md" },
+      { "Meshes" = "meshes.md" },
+    ] },
     { "Mouse" = "mouse.md" },
     { "Keyboard" = "keyboard.md" },
     { "Gamepad" = "gamepad.md" },
@@ -85,10 +87,11 @@ features = [
   "navigation.instant.prefetch",
   "navigation.instant.progress",
   "navigation.path",
-  "navigation.sections",
   "navigation.top",
   "navigation.tracking",
   "navigation.tabs",
+  # "navigation.sections",
+  # "navigation.expand",
   "search.highlight",
   #"navigation.indexes",
   #"toc.follow"
@@ -96,7 +99,6 @@ features = [
   #"navigation.tabs.sticky",
   #"navigation.prune",
   #"header.autohide",
-  #"navigation.expand",
   #"content.code.select",
   #"content.action.edit",
   #"content.action.view",
@@ -122,3 +124,11 @@ repo = "lucide/github"
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
 link = "https://github.com/cdervis/Polly"
+
+[project.markdown_extensions.pymdownx.tabbed.slugify]
+object = "pymdownx.slugs.slugify"
+kwds = { case = "lower" }
+
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true

@@ -4,9 +4,9 @@ icon: material/television-guide
 
 # Dear ImGui
 
-Dear ImGui is integrated into Polly as a first-class component and is automatically available via the `ImGui` class.
+Dear ImGui is integrated into Polly as a first-class component and is automatically available in the `Game` class.
 
-You don't create `ImGui` objects directly, just override the `#!cpp Game::onImGui()` method:
+You don't have to manage any ImGui objects. Just override the `#!cpp Game::onImGui()` method and use it directly:
 
 ```cpp
 struct MyGame : Game
@@ -36,3 +36,6 @@ struct MyGame : Game
 Drawing of the ImGui elements is handled automatically by Polly at the right time.
 
 For detailed instructions and documentation, please visit the [Dear ImGui website](https://github.com/ocornut/imgui).
+
+!!! note
+    More documentation will follow soon.

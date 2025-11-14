@@ -22,11 +22,11 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release --parallel
 ```
 
-On Windows, your game will run without any necessary runtime installations. Polly uses Vulkan on Windows, which requires a graphics driver to be installed.
+On Windows, your game will run without any necessary runtime installations. Polly uses Direct3D on Windows, which is part of Windows and requires no further installations.
 
 ## macOS
 
-On macOS, your game will run without any necessary runtime installations. Polly uses Metal on macOS, which requires no further installations, as it is part of macOS.
+On macOS, your game will run without any necessary runtime installations. Polly uses Metal on macOS, which is part of macOS and requires no further installations.
 
 The **minimum required** macOS version for Polly is **13.5** (macOS Ventura).
 
