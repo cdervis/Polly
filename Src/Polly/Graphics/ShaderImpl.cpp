@@ -22,6 +22,7 @@ String Shader::Impl::shaderParameterTypeString(const ShaderParameterType type)
         case ShaderParameterType::Vec3: return "Vec3";
         case ShaderParameterType::Vec4: return "Vec4";
         case ShaderParameterType::Matrix: return "Matrix";
+        case ShaderParameterType::Image: return "Image";
         case ShaderParameterType::FloatArray: return "float[]";
         case ShaderParameterType::IntArray: return "int[]";
         case ShaderParameterType::BoolArray: return "bool[]";

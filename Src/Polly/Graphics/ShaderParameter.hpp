@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Polly/Any.hpp"
+#include "Polly/Image.hpp"
 #include "Polly/String.hpp"
 
 namespace Polly
@@ -20,6 +21,7 @@ enum class ShaderParameterType : u8
     Vec3,
     Vec4,
     Matrix,
+    Image,
     FloatArray,
     IntArray,
     BoolArray,
@@ -46,6 +48,8 @@ class ShaderParameter final
     Maybe<u16> sizeInBytes;
     Maybe<u16> arraySize;
     Any        defaultValue;
+
+    Image boundImage;
 };
 
 static bool operator==(const ShaderParameter& lhs, const ShaderParameter& rhs)

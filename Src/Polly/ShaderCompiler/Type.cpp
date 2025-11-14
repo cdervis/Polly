@@ -470,7 +470,7 @@ bool ImageType::isImageType() const
 
 bool ImageType::canBeShaderParameter() const
 {
-    return false;
+    return true;
 }
 
 Maybe<u16> ImageType::occupiedSizeInCbuffer() const

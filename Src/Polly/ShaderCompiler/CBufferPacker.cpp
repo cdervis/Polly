@@ -22,6 +22,11 @@ CBufferPacker::Result CBufferPacker::pack(
     // Scalar parameters
     for (const auto* type : fieldTypes)
     {
+        if (!type->isScalarType())
+        {
+            continue;
+        }
+
         const auto paramSizeInBytes = *type->occupiedSizeInCbuffer();
         const auto baseAlignment    = *type->baseAlignmentInCbuffer();
         const auto offset           = nextAlignedNumber(currentOffset, baseAlignment);

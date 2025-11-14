@@ -101,6 +101,9 @@ class Shader
 
     /// Sets the value of a matrix array parameter.
     void set(StringView name, Span<Matrix> values, u32 offset = 0);
+    
+    /// Sets the value of an image parameter.
+    void set(StringView name, const Image& image);
 
     /// Gets the float value of a parameter.
     Maybe<float> floatValue(StringView name) const;

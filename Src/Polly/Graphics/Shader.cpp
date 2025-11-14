@@ -129,6 +129,12 @@ void Shader::set(const StringView name, const Span<Matrix> values, const u32 off
     impl->updateScalarArrayParameter(name, ShaderParameterType::MatrixArray, values, offset);
 }
 
+void Shader::set(StringView name, const Image& image)
+{
+    PollyDeclareThisImpl;
+    impl->updateImageParameter(name, image);
+}
+
 Maybe<float> Shader::floatValue(const StringView name) const
 {
     PollyDeclareThisImpl;

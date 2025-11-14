@@ -15,7 +15,6 @@
 
 namespace Polly
 {
-class Image;
 enum class ShaderType;
 
 enum class UserShaderFlags
@@ -105,6 +104,39 @@ class Shader::Impl : public GraphicsResource
         notifyPainterAfterParamChanged();
 
         logVerbose("Updated scalar parameter '{}'", name);
+    }
+
+    void updateImageParameter(StringView name, const Image& image)
+    {
+        auto* param = findParameter(name);
+
+        if (!param)
+        {
+            return;
+        }
+
+        assume(param->name == name);
+
+        if (param->type != ShaderParameterType::Image)
+        {
+            throw Error(formatString(
+                "Attempting to set value of parameter '{}' (type '{}') to "
+                "a value of type 'Image'.",
+                name,
+                shaderParameterTypeString(param->type)));
+        }
+
+        if (param->boundImage != image)
+        {
+            notifyPainterBeforeParamChanged();
+
+            param->boundImage = image;
+            _dirtyImageParameters.add(param);
+
+            notifyPainterAfterParamChanged();
+
+            logVerbose("Updated image parameter '{}'", name);
+        }
     }
 
     template<typename T>
@@ -204,6 +236,7 @@ class Shader::Impl : public GraphicsResource
     List<u8, 64>                      _cbufferData;
     ParameterList                     _parameters;
     SortedSet<const ShaderParameter*> _dirtyScalarParameters;
+    SortedSet<const ShaderParameter*> _dirtyImageParameters;
     UserShaderFlags                   _flags   = UserShaderFlags::None;
     bool                              _isInUse = false;
 };
