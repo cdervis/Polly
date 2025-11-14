@@ -208,6 +208,7 @@ UniquePtr<Shader::Impl> Painter::Impl::createUserShader(StringView sourceCode, S
                         .sizeInBytes  = param->type()->occupiedSizeInCbuffer(),
                         .arraySize    = param->arraySize(),
                         .defaultValue = param->defaultValue(),
+                        .boundImage   = {},
                     });
 
                 ++idx;
