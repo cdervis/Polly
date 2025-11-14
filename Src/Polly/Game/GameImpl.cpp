@@ -52,13 +52,6 @@ int Polly::Details::runGame(int a, char* b[], MainFunction c, [[maybe_unused]] v
 #include "Polly/Graphics/OpenGL/OpenGLWindow.hpp"
 #endif
 
-#ifdef polly_have_gfx_vulkan
-#include <Polly/Graphics/Vulkan/VulkanPainter.hpp>
-#include <Polly/Graphics/Vulkan/VulkanWindow.hpp>
-
-#include <SDL3/SDL_vulkan.h>
-#endif
-
 #include <imgui.h>
 
 #include <backends/imgui_impl_sdl3.h>
@@ -111,15 +104,6 @@ Game::Impl::Impl(const GameInitArgs& args)
 
 #ifdef polly_have_gfx_d3d11
     checkHResult(CreateDXGIFactory(IID_IDXGIFactory, &_idxgiFactory), "Failed to create the IDXGIFactory.");
-#endif
-
-#ifdef polly_have_gfx_vulkan
-    checkVkResult(
-        volkInitialize(),
-        "Failed to load Vulkan functions. This is an indication that the system does not support Vulkan.");
-
-    createVkInstance(args.title, args.version);
-    volkLoadInstance(_vkInstance);
 #endif
 
     createWindow(args.title, args.initialWindowSize, args.fullScreenDisplayIndex);
@@ -387,13 +371,6 @@ void Game::Impl::createWindow(
 #elif defined(polly_have_gfx_opengl)
     auto impl =
         makeUnique<OpenGLWindow>(title, initialWindowSize, fullScreenDisplayIndex, _connectedDisplays);
-#elif defined(polly_have_gfx_vulkan)
-    auto impl = makeUnique<VulkanWindow>(
-        title,
-        initialWindowSize,
-        fullScreenDisplayIndex,
-        _connectedDisplays,
-        _vkInstance);
 #else
 #error "Unsupported"
 #endif
@@ -471,16 +448,6 @@ void Game::Impl::createPainter()
     impl = makeUnique<D3D11Painter>(*_window.impl(), _performanceStats);
 #elif defined(polly_have_gfx_opengl)
     impl = makeUnique<OpenGLPainter>(*_window.impl(), _performanceStats);
-#elif defined(polly_have_gfx_vulkan)
-    assume(_vkInstance != VK_NULL_HANDLE);
-    assume(_vkApiVersion != 0);
-
-    impl = makeUnique<VulkanPainter>(
-        *_window.impl(),
-        _performanceStats,
-        _vkInstance,
-        _vkApiVersion,
-        _haveVkDebugLayer);
 #else
 #error "Unsupported"
 #endif
@@ -1053,132 +1020,8 @@ void Game::Impl::onFinalActionBeforeDeath()
 {
     logVerbose("Doing final cleanup before game death");
 
-#if polly_have_gfx_vulkan
-    if (_vkInstance != VK_NULL_HANDLE)
-    {
-        logVerbose("Destroying Vulkan instance");
-        vkDestroyInstance(_vkInstance, nullptr);
-        _vkInstance = VK_NULL_HANDLE;
-    }
-#endif
-
     InputImpl::destroyInstance();
 }
-
-#if polly_have_gfx_vulkan
-
-[[maybe_unused]]
-static constexpr auto sVkValidationLayerName = StringView("VK_LAYER_KHRONOS_validation");
-
-void Game::Impl::createVkInstance(StringView gameName, Version gameVersion)
-{
-    _vkApiVersion = VK_API_VERSION_1_0;
-
-    const auto gameNameStr = String(gameName);
-
-    auto appInfo               = VkApplicationInfo();
-    appInfo.sType              = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-    appInfo.pApplicationName   = gameNameStr.cstring();
-    appInfo.applicationVersion = VK_MAKE_VERSION(gameVersion.major, gameVersion.minor, gameVersion.revision);
-    appInfo.pEngineName        = "Polly";
-    appInfo.engineVersion =
-        VK_MAKE_VERSION(Polly::version.major, Polly::version.minor, Polly::version.revision);
-    appInfo.apiVersion = _vkApiVersion;
-
-    auto instanceInfo             = VkInstanceCreateInfo();
-    instanceInfo.sType            = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    instanceInfo.pApplicationInfo = &appInfo;
-
-    auto extensionNames = List<const char*, 12>();
-    {
-        auto  instanceExtensionCount = Uint32();
-        auto* instanceExtensions     = SDL_Vulkan_GetInstanceExtensions(&instanceExtensionCount);
-
-        if (!instanceExtensions)
-        {
-            throw Error("Failed to query Vulkan instance extensions.");
-        }
-
-        extensionNames.reserve(static_cast<size_t>(instanceExtensionCount) + 4);
-
-#ifndef NDEBUG
-#ifdef VK_EXT_DEBUG_REPORT_EXTENSION_NAME
-        extensionNames.add(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
-#endif
-
-#ifdef VK_EXT_DEBUG_UTILS_EXTENSION_NAME
-        extensionNames.add(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-#endif
-#endif
-
-        extensionNames.addRange(Span(instanceExtensions, instanceExtensionCount));
-    }
-
-    instanceInfo.enabledExtensionCount   = extensionNames.size();
-    instanceInfo.ppEnabledExtensionNames = extensionNames.data();
-
-    auto layersToEnable = List<const char*>();
-
-    auto layerCount = u32(0);
-    checkVkResult(
-        vkEnumerateInstanceLayerProperties(&layerCount, nullptr),
-        "Failed to obtain Vulkan instance layers. This is an indication for missing Vulkan support on the "
-        "system.");
-
-    if (layerCount == 0)
-    {
-        throw Error(
-            "The system provides no Vulkan instance layers. This is an indication for missing Vulkan "
-            "support on the system.");
-    }
-
-    auto availableLayers = List<VkLayerProperties, 16>();
-    availableLayers.resize(layerCount);
-    vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-
-#ifndef NDEBUG
-    const auto areValidationLayersSupported = std::ranges::any_of(
-        availableLayers,
-        [](const VkLayerProperties& prop) { return sVkValidationLayerName == prop.layerName; });
-
-    if (areValidationLayersSupported)
-    {
-        layersToEnable.add(sVkValidationLayerName.data());
-        _haveVkDebugLayer = true;
-    }
-#endif
-
-    if (!layersToEnable.isEmpty())
-    {
-        instanceInfo.enabledLayerCount   = layersToEnable.size();
-        instanceInfo.ppEnabledLayerNames = layersToEnable.data();
-    }
-
-    checkVkResult(
-        vkCreateInstance(&instanceInfo, nullptr, &_vkInstance),
-        "Failed to create the Vulkan instance.");
-
-    if (_vkInstance == VK_NULL_HANDLE)
-    {
-        throw Error(
-            "Vulkan instance creation succeeded, but the driver returned an invalid "
-            "instance handle.");
-    }
-
-    logInfo("Vulkan instance created");
-
-    if (const auto func = vkGetInstanceProcAddr(_vkInstance, "vkGetPhysicalDeviceSurfaceSupportKHR"); !func)
-    {
-        throw Error(
-            "Failed to enumerate Vulkan surface support. This may be due to the system not "
-            "supporting Vulkan "
-            "rendering.");
-    }
-
-    logVerbose("System supports vkGetPhysicalDeviceSurfaceSupportKHR()");
-}
-
-#endif
 
 Game::Impl::Finalizer::Finalizer(Impl& parentGame)
     : _parentGame(parentGame)

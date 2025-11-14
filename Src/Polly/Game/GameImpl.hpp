@@ -29,10 +29,6 @@
 #include "Polly/Graphics/D3D11/D3D11Prerequisites.hpp"
 #endif
 
-#ifdef polly_have_gfx_vulkan
-#include <volk.h>
-#endif
-
 #ifdef polly_have_gfx_metal
 #include <Foundation/NSAutoreleasePool.hpp>
 #include <Foundation/NSSharedPtr.hpp>
@@ -92,23 +88,6 @@ class Game::Impl final : public Object
     IDXGIFactory* idxgiFactory() const
     {
         return _idxgiFactory.Get();
-    }
-#endif
-
-#if polly_have_gfx_vulkan
-    VkInstance vkInstance() const
-    {
-        return _vkInstance;
-    }
-
-    u32 vkApiVersion() const
-    {
-        return _vkApiVersion;
-    }
-
-    bool haveVkDebugLayer() const
-    {
-        return _haveVkDebugLayer;
     }
 #endif
 
@@ -193,14 +172,6 @@ class Game::Impl final : public Object
 
 #ifdef polly_have_gfx_d3d11
     ComPtr<IDXGIFactory> _idxgiFactory;
-#endif
-
-#ifdef polly_have_gfx_vulkan
-    void createVkInstance(StringView gameName, Version gameVersion);
-
-    VkInstance _vkInstance       = VK_NULL_HANDLE;
-    u32        _vkApiVersion     = 0;
-    bool       _haveVkDebugLayer = false;
 #endif
 
     AudioDevice               _audioDevice;

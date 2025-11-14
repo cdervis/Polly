@@ -23,10 +23,6 @@
 #include "Polly/Graphics/OpenGL/OpenGLImage.hpp"
 #endif
 
-#if polly_have_gfx_vulkan
-#include "Polly/Graphics/Vulkan/VulkanPainter.hpp"
-#endif
-
 #define STB_TRUETYPE_IMPLEMENTATION
 #include "imstb_truetype.h"
 
@@ -238,124 +234,7 @@ const Font::Impl::RasterizedGlyph& Font::Impl::rasterizeGlyph(const RasterizedGl
             }
         }
 
-#if defined(polly_have_gfx_metal) || defined(polly_have_gfx_opengl) || defined(polly_have_gfx_d3d11)
-
         page.atlas.updateData(xInPage, yInPage, bitmapWidth, bitmapHeight, _glyphBufferRGBA.data(), true);
-
-#elif polly_have_gfx_vulkan
-
-        auto& deviceImpl   = *Painter::Impl::instance();
-        auto& vulkanDevice = static_cast<VulkanPainter&>(deviceImpl);
-        auto  vmaAllocator = vulkanDevice.vmaAllocator();
-        auto& vulkanImage  = static_cast<VulkanImage&>(*page.atlas.impl());
-        auto  vkImage      = vulkanImage.vkImage();
-
-        const auto dataSizeInBytes =
-            imageSlicePitch(vulkanImage.width(), vulkanImage.height(), vulkanImage.format());
-
-        auto vkTransferBuffer           = VkBuffer();
-        auto vkTransferBufferAllocation = VmaAllocation();
-
-        defer
-        {
-            vmaDestroyBuffer(vmaAllocator, vkTransferBuffer, vkTransferBufferAllocation);
-        };
-
-        auto bufferInfo        = VkBufferCreateInfo();
-        bufferInfo.sType       = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-        bufferInfo.size        = VkDeviceSize(dataSizeInBytes);
-        bufferInfo.usage       = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
-        bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-
-        auto allocInfo  = VmaAllocationCreateInfo();
-        allocInfo.usage = VMA_MEMORY_USAGE_CPU_ONLY;
-
-        checkVkResult(
-            vmaCreateBuffer(
-                vmaAllocator,
-                &bufferInfo,
-                &allocInfo,
-                &vkTransferBuffer,
-                &vkTransferBufferAllocation,
-                nullptr),
-            "Failed to create an internal image buffer.");
-
-#ifndef NDEBUG
-        vmaSetAllocationName(vmaAllocator, vkTransferBufferAllocation, "Font transfer buffer");
-#endif
-
-        void* mappedData = nullptr;
-        vmaMapMemory(vmaAllocator, vkTransferBufferAllocation, &mappedData);
-        std::memcpy(mappedData, page.atlasData.data(), dataSizeInBytes);
-        vmaUnmapMemory(vmaAllocator, vkTransferBufferAllocation);
-
-        vulkanDevice.submitImmediateGraphicsCommands(
-            [&](VkCommandBuffer cmd)
-            {
-                auto range       = VkImageSubresourceRange();
-                range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-                range.levelCount = 1;
-                range.layerCount = 1;
-
-                auto imageBarrierToTransfer             = VkImageMemoryBarrier();
-                imageBarrierToTransfer.sType            = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-                imageBarrierToTransfer.dstAccessMask    = VK_ACCESS_TRANSFER_WRITE_BIT;
-                imageBarrierToTransfer.oldLayout        = VK_IMAGE_LAYOUT_UNDEFINED;
-                imageBarrierToTransfer.newLayout        = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
-                imageBarrierToTransfer.image            = vkImage;
-                imageBarrierToTransfer.subresourceRange = range;
-
-                vkCmdPipelineBarrier(
-                    cmd,
-                    VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-                    VK_PIPELINE_STAGE_TRANSFER_BIT,
-                    0,
-                    0,
-                    nullptr,
-                    0,
-                    nullptr,
-                    1,
-                    &imageBarrierToTransfer);
-
-                auto copyRegion                        = VkBufferImageCopy();
-                copyRegion.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-                copyRegion.imageSubresource.layerCount = 1;
-                copyRegion.imageExtent.width           = vulkanImage.width();
-                copyRegion.imageExtent.height          = vulkanImage.height();
-                copyRegion.imageExtent.depth           = 1;
-
-                vkCmdCopyBufferToImage(
-                    cmd,
-                    vkTransferBuffer,
-                    vkImage,
-                    VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                    1,
-                    &copyRegion);
-
-                auto imageBarrierToReadable = imageBarrierToTransfer;
-
-                imageBarrierToReadable.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
-                imageBarrierToReadable.newLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-
-                imageBarrierToReadable.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
-                imageBarrierToReadable.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
-
-                vkCmdPipelineBarrier(
-                    cmd,
-                    VK_PIPELINE_STAGE_TRANSFER_BIT,
-                    VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
-                    0,
-                    0,
-                    nullptr,
-                    0,
-                    nullptr,
-                    1,
-                    &imageBarrierToReadable);
-            });
-
-#else
-#error "Unsupported"
-#endif
     }
 
     auto insertedPtr = _rasterizedGlyphs.add(
