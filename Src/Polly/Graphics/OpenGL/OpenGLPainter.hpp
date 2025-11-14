@@ -103,7 +103,7 @@ class OpenGLPainter final : public Painter::Impl
     void createMeshRenderingResources();
 
     [[nodiscard]]
-    PainterCapabilities determineCapabilities() const;
+    GraphicsDeviceCapabilities determineCapabilities() const;
 
     GLuint selectUserShaderParamsCBuffer(u32 size) const;
 

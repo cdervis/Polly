@@ -712,9 +712,9 @@ void OpenGLPainter::createMeshRenderingResources()
         "MeshVAO"_sv);
 }
 
-PainterCapabilities OpenGLPainter::determineCapabilities() const
+GraphicsDeviceCapabilities OpenGLPainter::determineCapabilities() const
 {
-    auto caps = PainterCapabilities();
+    auto caps = GraphicsDeviceCapabilities();
 
     {
         auto value = GLint();

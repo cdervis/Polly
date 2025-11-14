@@ -90,7 +90,7 @@ class D3D11Painter final : public Painter::Impl
 
     void createID3D11Device();
 
-    PainterCapabilities determineCapabilities() const;
+    GraphicsDeviceCapabilities determineCapabilities() const;
 
     void createDepthStencilState();
 

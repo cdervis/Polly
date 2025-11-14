@@ -667,9 +667,9 @@ void D3D11Painter::createID3D11Device()
 #endif
 }
 
-PainterCapabilities D3D11Painter::determineCapabilities() const
+GraphicsDeviceCapabilities D3D11Painter::determineCapabilities() const
 {
-    auto caps = PainterCapabilities();
+    auto caps = GraphicsDeviceCapabilities();
 
     if (_featureLevel >= D3D_FEATURE_LEVEL_11_0)
     {
