@@ -1,11 +1,36 @@
-                    GNU GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
+# License
+
+Polly is available under a dual-license model.
+
+- Polly, the framework itself, is licensed under the [GPLv3](#gplv3) license.
+- When Polly is linked into a game, it is licensed under the [MIT](#mit) license.
+
+This means that when you fork Polly, your fork must adhere to the GPLv3 license, i.e. it must be redistributed under that same license.
+
+When you create a game, Polly is a part of your game and only requires your game to adhere to the MIT license. For example, a short mention of the fact that Polly is used in the game suffices, i.e. in a splash screen or game credits.
+
+With either license, Polly is **completely free of charge** and requires no royalty share.
+
+## MIT
+
+Copyright 2025 Cem Dervis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## GPLv3
+
+**GNU GENERAL PUBLIC LICENSE**
+**Version 3, 29 June 2007**
 
 Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
 Everyone is permitted to copy and distribute verbatim copies
 of this license document, but changing it is not allowed.
 
-                            Preamble
+**Preamble**
 
 The GNU General Public License is a free, copyleft license for
 software and other kinds of works.
@@ -68,7 +93,7 @@ patents cannot be used to render the program non-free.
 The precise terms and conditions for copying, distribution and
 modification follow.
 
-                       TERMS AND CONDITIONS
+**TERMS AND CONDITIONS**
 
 0. Definitions.
 
@@ -618,9 +643,8 @@ an absolute waiver of all civil liability in connection with the
 Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
-                     END OF TERMS AND CONDITIONS
-
-            How to Apply These Terms to Your New Programs
+**END OF TERMS AND CONDITIONS**
+**How to Apply These Terms to Your New Programs**
 
 If you develop a new program, and you want it to be of the greatest
 possible use to the public, the best way to achieve this is to make it
@@ -657,7 +681,7 @@ notice like this when it starts in an interactive mode:
     This is free software, and you are welcome to redistribute it
     under certain conditions; type `show c' for details.
 
-The hypothetical commands `show w' and `show c' should show the appropriate
+The hypothetical commands 'show w' and 'show c' should show the appropriate
 parts of the General Public License.  Of course, your program's commands
 might be different; for a GUI interface, you would use an "about box".
 
