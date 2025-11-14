@@ -139,6 +139,11 @@ void Game::setTargetFramerate(Maybe<float> value)
     _impl->setTargetFramerate(value);
 }
 
+GraphicsDeviceCapabilities Game::graphicsDeviceCapabilities() const
+{
+    return _impl->painter().capabilities();
+}
+
 GamePerformanceStats Game::performanceStats() const
 {
     return _impl->previousPerformanceStats();

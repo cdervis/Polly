@@ -20,6 +20,7 @@ class Painter;
 class AudioDevice;
 class ImGui;
 struct GamePerformanceStats;
+struct GraphicsDeviceCapabilities;
 enum class Key;
 enum class KeyModifier;
 enum class MouseButton;
@@ -160,6 +161,9 @@ class Game
     ///               If an empty optional is specified, the game runs at an
     ///              uncapped framerate.
     void setTargetFramerate(Maybe<float> value);
+
+    /// Gets the capabilities of the system's graphics device.
+    GraphicsDeviceCapabilities graphicsDeviceCapabilities() const;
 
     /// Gets metrics about the game's current performance.
     GamePerformanceStats performanceStats() const;
